@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<MWGService>();
+builder.Services.AddScoped<GenreRankingService>();
 
 var connectionString = builder.Configuration.GetConnectionString("MyConnectionString");
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));

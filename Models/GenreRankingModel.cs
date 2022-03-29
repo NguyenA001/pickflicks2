@@ -7,7 +7,6 @@ namespace pickflicks2.Models
         public int UserId { get; set; }        
         public int Biography { get; set; }
         public int FilmNoir { get; set; }
-        public int GameShow { get; set; }
         public int Musical { get; set; }
         public int Sport { get; set; }
         public int Short { get; set; }
