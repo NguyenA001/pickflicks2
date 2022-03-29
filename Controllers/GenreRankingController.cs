@@ -36,11 +36,9 @@ namespace pickflicks2.Controllers
         } 
 
         [HttpPost("UpdateGenreRankingsByMWGId/{MWGId}")]
-        public IEnumerable<GenreRankingModel> UpdateGenreRankingsByMWGId(int MWGId)
+        public bool UpdateGenreRankingsByMWGId(int MWGId)
         {
             return _data.UpdateGenreRankingsByMWGId(MWGId);
         } 
-
-
     }
 }

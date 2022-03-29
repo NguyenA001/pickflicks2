@@ -35,23 +35,47 @@ namespace pickflicks2.Services
             return _context.GenreRankingInfo.Where(item => item.UserId == UserId);
         } 
 
-        public IEnumerable<GenreRankingModel> UpdateGenreRankingsByMWGId(int MWGId)
+        public bool UpdateGenreRankingsByMWGId(int MWGId)
         {
+            // Get each GenreRankingModel with that MWGId
+            // Then se each GenreRankingModel to empty strings
+            // Return new list of GenreRankingModels with that MWGId?
+
             bool result = false;
+
             List<GenreRankingModel> AllGenreRankingsWithMWGId = new List<GenreRankingModel>();
-            AllGenreRankingsWithMWGId = GetGenreRankingsByMWGId(MWGId);
-            GenreRankingModel isInMWG = 
+            AllGenreRankingsWithMWGId = _context.GenreRankingInfo.Where(item => item.MWGID).ToList();
 
-
-
-            if (foundMWG != null)
+            foreach (GenreRankingModel Group in AllGenreRankingsWithMWGId)
             {
-                foundMWG.MWGName = updatedMWGName;
-                _context.Update<MWGModel>(foundMWG);
+                Group.Biography = 0;
+                Group.FilmNoir = 0;
+                Group.Musical = 0;
+                Group.Sport = 0;
+                Group.Short = 0;
+                Group.Adult = 0;
+                Group.Fantasy = 0;
+                Group.Animation = 0;
+                Group.Drama = 0;
+                Group.Horror = 0;
+                Group.Action = 0;
+                Group.Comedy = 0;
+                Group.History = 0;
+                Group.Western = 0;
+                Group.Thriller = 0;
+                Group.Crime = 0;
+                Group.Documentary = 0;
+                Group.ScienceFiction = 0;
+                Group.Mystery = 0;
+                Group.Music = 0;
+                Group.Romance = 0;
+                Group.Family = 0;
+                Group.War = 0;
+
+                _context.Update<GenreRankingModel>(Group);
                 result = _context.SaveChanges() != 0;
             }
             return result;
         } 
-
     }
 }
