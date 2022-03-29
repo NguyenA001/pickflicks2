@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using pickflicks2.Models;
+using pickflicks2.Services.Context;
 
 namespace pickflicks2.Services
 {
