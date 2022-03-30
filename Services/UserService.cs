@@ -107,6 +107,8 @@ namespace pickflicks2.Services
         {
             var dtoInfo = new UserDTO();
             var foundUser = _context.UserInfo.SingleOrDefault(user => user.Username == username);
+            if(foundUser != null)
+            {
             dtoInfo.Id = foundUser.Id;
             dtoInfo.Username = foundUser.Username;
             dtoInfo.Icon = foundUser.Icon;
@@ -114,7 +116,7 @@ namespace pickflicks2.Services
             dtoInfo.ListOfMWGId = foundUser.ListOfMWGId;
             dtoInfo.FavoritedMWGId = foundUser.FavoritedMWGId;
             dtoInfo.IsDeleted = foundUser.IsDeleted;
-
+            }
             return dtoInfo;
         }
 
