@@ -173,7 +173,7 @@ namespace pickflicks2.Services
             var foundUser = _context.UserInfo.SingleOrDefault(user => user.Id == userId);
 
             if (foundUser != null) {
-                foundUser.FavoritedMWGId += ',' + MWGId; 
+                foundUser.FavoritedMWGId += ',' + MWGId.ToString(); 
 
                 _context.Update<UserModel>(foundUser);
                 result = _context.SaveChanges() != 0;
@@ -190,13 +190,15 @@ namespace pickflicks2.Services
             if (foundUser != null)
             {
                 int position = foundUser.FavoritedMWGId.IndexOf(MWGId.ToString());
-                if (position == foundUser.FavoritedMWGId.Length - 1)
+                int lengthOfMWGId = MWGId.ToString().Length;
+                if (position == foundUser.FavoritedMWGId.Length - lengthOfMWGId)
                 {
-                    foundUser.FavoritedMWGId = foundUser.FavoritedMWGId.Remove(position - 1, 2);
+                    foundUser.FavoritedMWGId = foundUser.FavoritedMWGId.Remove(position - 1, lengthOfMWGId+1);
                 }
                 else
                 {
-                    foundUser.FavoritedMWGId = foundUser.FavoritedMWGId.Remove(position, 2);
+                    foundUser.FavoritedMWGId = foundUser.FavoritedMWGId.Remove(position, lengthOfMWGId
+                    +1);
                 }
                 _context.Update<UserModel>(foundUser);
                 result = _context.SaveChanges() != 0;

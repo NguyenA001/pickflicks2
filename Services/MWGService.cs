@@ -17,15 +17,13 @@ namespace pickflicks2.Services
             _context = context;
         }
 
-        public bool AddMWG(MWGModel newMWGModel, int GroupCreatorId)
+        public bool AddMWG(MWGModel newMWGModel)
         {
             bool result = false;
             bool doesMWGExist = _context.MWGInfo.SingleOrDefault(MWG => MWG.Id == newMWGModel.Id) != null;
             if (!doesMWGExist)
             {
                 _context.Add(newMWGModel);
-                newMWGModel.GroupCreatorId += GroupCreatorId;
-                newMWGModel.MembersId += GroupCreatorId;
                 result = _context.SaveChanges() != 0;
             }
             return result;
@@ -122,15 +120,14 @@ namespace pickflicks2.Services
             if (foundMWG != null)
             {
                 int position = foundMWG.MembersId.IndexOf(deletedMemberId.ToString());
-                if (position == foundMWG.MembersId.Length - 1)
+                int lengthOfDeletedMemberId = deletedMemberId.ToString().Length;
+                if (position == foundMWG.MembersId.Length - lengthOfDeletedMemberId)
                 {
-                    foundMWG.MembersId = foundMWG.MembersId.Remove(position - 1, 2);
-
+                    foundMWG.MembersId = foundMWG.MembersId.Remove(position - 1, lengthOfDeletedMemberId+1);
                 }
                 else
                 {
-
-                    foundMWG.MembersId = foundMWG.MembersId.Remove(position, 2);
+                    foundMWG.MembersId = foundMWG.MembersId.Remove(position, lengthOfDeletedMemberId+1);
                 }
                 _context.Update<MWGModel>(foundMWG);
                 result = _context.SaveChanges() != 0;
