@@ -17,13 +17,15 @@ namespace pickflicks2.Services
             _context = context;
         }
 
-        public bool AddMWG(MWGModel newMWGModel)
+        public bool AddMWG(MWGModel newMWGModel, int GroupCreatorId)
         {
             bool result = false;
             bool doesMWGExist = _context.MWGInfo.SingleOrDefault(MWG => MWG.Id == newMWGModel.Id) != null;
             if (!doesMWGExist)
             {
                 _context.Add(newMWGModel);
+                newMWGModel.GroupCreatorId += GroupCreatorId;
+                newMWGModel.MembersId += GroupCreatorId;
                 result = _context.SaveChanges() != 0;
             }
             return result;

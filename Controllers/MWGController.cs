@@ -19,10 +19,10 @@ namespace pickflicks2.Controllers
         }
 
         // Create a MWG by MWGModel (will return a bool)
-        [HttpPost("AddMWG")]
-        public bool AddMWG(MWGModel newMWG)
+        [HttpPost("AddMWG/{groupCreatorId}")]
+        public bool AddMWG(MWGModel newMWG, int groupCreatorId)
         {
-            return _data.AddMWG(newMWG);
+            return _data.AddMWG(newMWG, groupCreatorId);
         }
 
         // Get all MWGs from table (will return a collection)
