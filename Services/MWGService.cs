@@ -105,7 +105,7 @@ namespace pickflicks2.Services
             if (foundMWG != null)
             {
                 // Append the new userId into the string
-                foundMWG.UserSuggestedMovies += newMovie + ',';
+                foundMWG.UserSuggestedMovies += ',' + newMovie;
                 _context.Update<MWGModel>(foundMWG);
                 result = _context.SaveChanges() != 0;
             }

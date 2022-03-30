@@ -46,7 +46,7 @@ namespace pickflicks2.Services
             bool result = false;
 
             List<GenreRankingModel> AllGenreRankingsWithMWGId = new List<GenreRankingModel>();
-            AllGenreRankingsWithMWGId = _context.GenreRankingInfo.Where(item => item.MWGID).ToList();
+            AllGenreRankingsWithMWGId = _context.GenreRankingInfo.Where(item => item.MWGId == MWGId).ToList();
 
             foreach (GenreRankingModel Group in AllGenreRankingsWithMWGId)
             {

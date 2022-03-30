@@ -60,5 +60,19 @@ namespace pickflicks2.Controllers
         {
             return _data.DeleteUser(username);
         }
+
+        // Add a favorite to a MWG 
+        [HttpPost("AddFavoriteMWG/{userId}/{MWGId}")]
+        public bool AddFavoriteMWG(int userId, int MWGId)
+        {
+            return _data.AddFavoriteMWG(userId, MWGId);
+        }
+
+        // Remove a favorite to a MWG 
+        [HttpPost("RemoveFavoriteMWG/{userId}/{MWGId}")]
+        public bool RemoveFavoriteMWG(int userId, int MWGId)
+        {
+            return _data.RemoveFavoriteMWG(userId, MWGId);
+        }
     }
 }

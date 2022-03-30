@@ -164,5 +164,44 @@ namespace pickflicks2.Services
         {
             return _context.UserInfo.SingleOrDefault(item => item.Username == username);
         }
+
+        // Add a favorite to a MWG 
+        public bool AddFavoriteMWG(int userId, int MWGId)
+        {
+            bool result = false;
+
+            var foundUser = _context.UserInfo.SingleOrDefault(user => user.Id == userId);
+
+            if (foundUser != null) {
+                foundUser.FavoritedMWGId += ',' + MWGId; 
+
+                _context.Update<MWGModel>(foundUser);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
+
+        // Remove a favorite to a MWG 
+        public bool RemoveFavoriteMWG(int userId, int MWGId)
+        {
+            bool result = false;
+            var foundUser = _context.UserInfo.SingleOrDefault(user => user.Id == userId);
+
+            if (foundUser != null)
+            {
+                int position = foundUser.FavoritedMWGId.IndexOf(MWGId.ToString());
+                if (position == foundUser.FavoritedMWGId.Length - 1)
+                {
+                    foundUser.FavoritedMWGId = foundUser.FavoritedMWGId.Remove(position - 1, 2);
+                }
+                else
+                {
+                    foundUser.FavoritedMWGId = foundUser.FavoritedMWGId.Remove(position, 2);
+                }
+                _context.Update<UserModel>(foundUser);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
     }
 }
