@@ -175,7 +175,7 @@ namespace pickflicks2.Services
             if (foundUser != null) {
                 foundUser.FavoritedMWGId += ',' + MWGId; 
 
-                _context.Update<MWGModel>(foundUser);
+                _context.Update<UserModel>(foundUser);
                 result = _context.SaveChanges() != 0;
             }
             return result;
