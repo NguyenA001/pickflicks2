@@ -98,6 +98,7 @@ namespace pickflicks2.Services.Context
                     MWGName = "First MWG",
                     GroupCreatorId = 1,
                     MembersId = "1,2,3",
+                    MembersNames = "Dylan,Sophie,An",
                     UserSuggestedMovies = "Toy Story 3, Wolf of Wallstreet",
                     IsDeleted = false
                 },
@@ -106,6 +107,7 @@ namespace pickflicks2.Services.Context
                     MWGName = "Second MWG",
                     GroupCreatorId = 2,
                     MembersId = "1,2,4",
+                    MembersNames = "Dylan,Sophie,Angel",
                     UserSuggestedMovies = "Encanto",
                     IsDeleted = false
                 },
@@ -114,6 +116,7 @@ namespace pickflicks2.Services.Context
                     MWGName = "Third MWG",
                     GroupCreatorId = 3,
                     MembersId = "1,2,3,5",
+                    MembersNames = "Dylan,Sophie,An,JT",
                     UserSuggestedMovies = "Frozen lol",
                     IsDeleted = false
                 },

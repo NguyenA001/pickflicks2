@@ -84,7 +84,7 @@ namespace pickflicks2.Services
         }
 
         // Hopefully this works
-        public bool AddMemberToMWG(int MWGId, int newMemberId)
+        public bool AddMemberToMWG(int MWGId, int newMemberId, string? newMemberName)
         {
             bool result = false;
             MWGModel foundMWG = GetMWGById(MWGId);
@@ -92,6 +92,7 @@ namespace pickflicks2.Services
             {
                 // Append the new userId into the string
                 foundMWG.MembersId += ',' + newMemberId.ToString();
+                foundMWG.MembersNames += ',' + newMemberName;
                 _context.Update<MWGModel>(foundMWG);
                 result = _context.SaveChanges() != 0;
             }
@@ -113,21 +114,27 @@ namespace pickflicks2.Services
         }
 
 
-        public bool DeleteMemberFromMWG(int MWGId, int deletedMemberId)
+        public bool DeleteMemberFromMWG(int MWGId, int deletedMemberId, string? deleteMemberName)
         {
             bool result = false;
             MWGModel foundMWG = GetMWGById(MWGId);
             if (foundMWG != null)
             {
                 int position = foundMWG.MembersId.IndexOf(deletedMemberId.ToString());
+                int namePosition = foundMWG.MembersNames.IndexOf(deleteMemberName);
+
                 int lengthOfDeletedMemberId = deletedMemberId.ToString().Length;
+                int lengthOfDeletedMemberName = deleteMemberName.Length;
+
                 if (position == foundMWG.MembersId.Length - lengthOfDeletedMemberId)
                 {
                     foundMWG.MembersId = foundMWG.MembersId.Remove(position - 1, lengthOfDeletedMemberId+1);
+                    foundMWG.MembersNames = foundMWG.MembersNames.Remove(namePosition - 1, lengthOfDeletedMemberName+1);
                 }
                 else
                 {
                     foundMWG.MembersId = foundMWG.MembersId.Remove(position, lengthOfDeletedMemberId+1);
+                    foundMWG.MembersNames = foundMWG.MembersNames.Remove(namePosition, lengthOfDeletedMemberName+1);
                 }
                 _context.Update<MWGModel>(foundMWG);
                 result = _context.SaveChanges() != 0;
