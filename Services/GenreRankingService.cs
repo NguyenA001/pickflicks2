@@ -79,5 +79,43 @@ namespace pickflicks2.Services
             }
             return result;
         } 
+
+        public string GetTopRankedGenre(int MWGId, string genre) 
+        {  
+            // genres = 'drama,action,horror,comedey,history'
+
+            List<GenreRankingModel> AllGenreRankingsWithMWGId = new List<GenreRankingModel>();
+            AllGenreRankingsWithMWGId = _context.GenreRankingInfo.Where(item => item.MWGId == MWGId).ToList();
+
+            // Get five voted genre for from each Genre
+
+            int firstGenreTotal = 0;
+            int secondGenreTotal = 0;
+            int thirdGenreTotal = 0;
+            int fourthGenreTotal = 0;
+            int fithGenreTotal = 0;
+
+            int[] highestArr = new int[5];
+            int indexOfHighestGenre = 0; 
+
+            for (int i = 0; i < AllGenreRankingsWithMWGId.Count; i++) { 
+                int firstGenre = AllGenreRankingsWithMWGId[i].genre[0];  // set firstGenere to drama's int value 
+                int secondGenre = AllGenreRankingsWithMWGId[i].genre[1]; 
+                int thirdGenre = AllGenreRankingsWithMWGId[i].genre[2]; 
+                int fourthGenre = AllGenreRankingsWithMWGId[i].genre[3]; 
+                int fithGenre = AllGenreRankingsWithMWGId[i].genre[4]; 
+
+                firstGenreTotal += firstGenere;
+                secondGenreTotal += secondGenre;
+                thirdGenreTotal += thirdGenre;
+                fourthGenreTotal += fourthGenre;
+                fithGenreTotal += fithGenre;
+                
+                highestArr.Add(firstGenreTotal, secondGenreTotal, thirdGenreTotal, fourthGenreTotal, fithGenreTotal);
+                indexOfHighestGenre = highestArr.indexOf(Max());
+
+                return genre[indexOfHighestGenre];
+            }
+        }
     }
 }

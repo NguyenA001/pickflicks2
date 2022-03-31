@@ -42,5 +42,12 @@ namespace pickflicks2.Controllers
         {
             return _data.UpdateGenreRankingsByMWGId(MWGId);
         } 
+
+        // Get top ranked genre from MWGID
+        [HttpGet("GetTopRankedGenre/{MWGId")]
+        public string GetTopRankedGenre(int MWGId) 
+        {
+            return _data.GetTopRankedGenre(MWGId); 
+        }
     }
 }
