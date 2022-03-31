@@ -69,10 +69,10 @@ namespace pickflicks2.Controllers
 
 
         // Add a members to MWG only the GrouoCreator can do this (will return a bool)
-        [HttpPost("AddMemberToMWG/{MWGId}/{newMemberId}")]
-        public bool AddMemberToMWG(int MWGId, int newMemberId)
+        [HttpPost("AddMemberToMWG/{MWGId}/{newMemberId}/{newMemberName}")]
+        public bool AddMemberToMWG(int MWGId, int newMemberId, string? newMemberName)
         {
-            return _data.AddMemberToMWG(MWGId, newMemberId);
+            return _data.AddMemberToMWG(MWGId, newMemberId, newMemberName);
         }
 
         // Add a user suggested movie to a MWG (will return a bool)
@@ -82,10 +82,10 @@ namespace pickflicks2.Controllers
             return _data.AddUserSuggestedMovies(MWGId, newMovie);
         }
 
-        [HttpPost("DeleteMemberFromMWG/{MWGId}/{deletedMemberId}")]
-        public bool DeleteMemberFromMWG(int MWGId, int deletedMemberId)
+        [HttpPost("DeleteMemberFromMWG/{MWGId}/{deletedMemberId}/{deleteMemberName}")]
+        public bool DeleteMemberFromMWG(int MWGId, int deletedMemberId, string? deleteMemberName)
         {
-            return _data.DeleteMemberFromMWG(MWGId, deletedMemberId);
+            return _data.DeleteMemberFromMWG(MWGId, deletedMemberId, deleteMemberName);
         }
 
         // Delete a MWG by MWGName (will return a bool)
