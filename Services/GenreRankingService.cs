@@ -45,47 +45,49 @@ namespace pickflicks2.Services
 
             bool result = false;
 
-            List<GenreRankingModel> AllGenreRankingsWithMWGId = new List<GenreRankingModel>();
-            AllGenreRankingsWithMWGId = _context.GenreRankingInfo.Where(item => item.MWGId == MWGId).ToList();
+            // List<GenreRankingModel> AllGenreRankingsWithMWGId = new List<GenreRankingModel>();
+            // AllGenreRankingsWithMWGId = _context.GenreRankingInfo.Where(item => item.MWGId == MWGId).ToList();
 
-            foreach (GenreRankingModel Group in AllGenreRankingsWithMWGId)
-            {
-                Group.Biography = 0;
-                Group.FilmNoir = 0;
-                Group.Musical = 0;
-                Group.Sport = 0;
-                Group.Short = 0;
-                Group.Adult = 0;
-                Group.Fantasy = 0;
-                Group.Animation = 0;
-                Group.Drama = 0;
-                Group.Horror = 0;
-                Group.Action = 0;
-                Group.Comedy = 0;
-                Group.History = 0;
-                Group.Western = 0;
-                Group.Thriller = 0;
-                Group.Crime = 0;
-                Group.Documentary = 0;
-                Group.ScienceFiction = 0;
-                Group.Mystery = 0;
-                Group.Music = 0;
-                Group.Romance = 0;
-                Group.Family = 0;
-                Group.War = 0;
+            // foreach (GenreRankingModel Group in AllGenreRankingsWithMWGId)
+            // {
+            //     Group.Biography = 0;
+            //     Group.FilmNoir = 0;
+            //     Group.Musical = 0;
+            //     Group.Sport = 0;
+            //     Group.Short = 0;
+            //     Group.Adult = 0;
+            //     Group.Fantasy = 0;
+            //     Group.Animation = 0;
+            //     Group.Drama = 0;
+            //     Group.Horror = 0;
+            //     Group.Action = 0;
+            //     Group.Comedy = 0;
+            //     Group.History = 0;
+            //     Group.Western = 0;
+            //     Group.Thriller = 0;
+            //     Group.Crime = 0;
+            //     Group.Documentary = 0;
+            //     Group.ScienceFiction = 0;
+            //     Group.Mystery = 0;
+            //     Group.Music = 0;
+            //     Group.Romance = 0;
+            //     Group.Family = 0;
+            //     Group.War = 0;
 
-                _context.Update<GenreRankingModel>(Group);
-                result = _context.SaveChanges() != 0;
-            }
+            //     _context.Update<GenreRankingModel>(Group);
+            //     result = _context.SaveChanges() != 0;
+            // }
             return result;
         } 
 
-        public string GetTopRankedGenre(int MWGId, string genre) 
+        public string GetTopRankedGenre(int MWGId) 
         {  
             // genres = 'drama,action,horror,comedey,history'
 
             List<GenreRankingModel> AllGenreRankingsWithMWGId = new List<GenreRankingModel>();
             AllGenreRankingsWithMWGId = _context.GenreRankingInfo.Where(item => item.MWGId == MWGId).ToList();
+            MWGModel foundMWG =  _context.MWGInfo.SingleOrDefault(item => item.Id == MWGId);
+            string genre = foundMWG.ChosenGenres;
 
             // Get five voted genre for from each Genre
 
@@ -97,24 +99,31 @@ namespace pickflicks2.Services
 
             int[] highestArr = new int[5];
             int indexOfHighestGenre = 0; 
+            int highestGenre;
 
             for (int i = 0; i < AllGenreRankingsWithMWGId.Count; i++) { 
-                int firstGenre = AllGenreRankingsWithMWGId[i].genre[0];  // set firstGenere to drama's int value 
-                int secondGenre = AllGenreRankingsWithMWGId[i].genre[1]; 
-                int thirdGenre = AllGenreRankingsWithMWGId[i].genre[2]; 
-                int fourthGenre = AllGenreRankingsWithMWGId[i].genre[3]; 
-                int fithGenre = AllGenreRankingsWithMWGId[i].genre[4]; 
+                int firstGenre = AllGenreRankingsWithMWGId[i].Genre1;  // set firstGenere to drama's int value 
+                int secondGenre = AllGenreRankingsWithMWGId[i].Genre2; 
+                int thirdGenre = AllGenreRankingsWithMWGId[i].Genre3; 
+                int fourthGenre = AllGenreRankingsWithMWGId[i].Genre4; 
+                int fithGenre = AllGenreRankingsWithMWGId[i].Genre5; 
 
-                firstGenreTotal += firstGenere;
+                firstGenreTotal += firstGenre;
                 secondGenreTotal += secondGenre;
                 thirdGenreTotal += thirdGenre;
                 fourthGenreTotal += fourthGenre;
                 fithGenreTotal += fithGenre;
                 
-                highestArr.Add(firstGenreTotal, secondGenreTotal, thirdGenreTotal, fourthGenreTotal, fithGenreTotal);
-                indexOfHighestGenre = highestArr.indexOf(Max());
+                highestArr[0] = (firstGenreTotal);
+                highestArr[1] = (secondGenreTotal);
+                highestArr[2] = (thirdGenreTotal);
+                highestArr[3] = (fourthGenreTotal);
+                highestArr[4] = (fithGenreTotal);
 
-                return genre[indexOfHighestGenre];
+                highestGenre = highestArr.Max();
+                indexOfHighestGenre = highestArr.IndexOf(highestGenre.ToString());
+
+                return foundMWG.ChosenGenres[highestGenre].ToString();
             }
         }
     }
