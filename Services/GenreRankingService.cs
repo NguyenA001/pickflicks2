@@ -82,14 +82,14 @@ namespace pickflicks2.Services
 
         public string GetTopRankedGenre(int MWGId) 
         {  
-            // genres = 'drama,action,horror,comedey,history'
+            // Get MWG from MWGID
+            MWGModel foundMWG =  _context.MWGInfo.SingleOrDefault(item => item.Id == MWGId);
 
+            string chosenGenres = foundMWG.ChosenGenres;
+            // chosenGenres = 'drama,action,horror,comedey,history'
+            
             List<GenreRankingModel> AllGenreRankingsWithMWGId = new List<GenreRankingModel>();
             AllGenreRankingsWithMWGId = _context.GenreRankingInfo.Where(item => item.MWGId == MWGId).ToList();
-            MWGModel foundMWG =  _context.MWGInfo.SingleOrDefault(item => item.Id == MWGId);
-            string genre = foundMWG.ChosenGenres;
-
-            // Get five voted genre for from each Genre
 
             int firstGenreTotal = 0;
             int secondGenreTotal = 0;
@@ -114,17 +114,17 @@ namespace pickflicks2.Services
                 fourthGenreTotal += fourthGenre;
                 fithGenreTotal += fithGenre;
                 
-                highestArr[0] = (firstGenreTotal);
-                highestArr[1] = (secondGenreTotal);
-                highestArr[2] = (thirdGenreTotal);
-                highestArr[3] = (fourthGenreTotal);
-                highestArr[4] = (fithGenreTotal);
-
-                highestGenre = highestArr.Max();
-                indexOfHighestGenre = highestArr.IndexOf(highestGenre.ToString());
-
-                return foundMWG.ChosenGenres[highestGenre].ToString();
             }
+            highestArr[0] = (firstGenreTotal);
+            highestArr[1] = (secondGenreTotal);
+            highestArr[2] = (thirdGenreTotal);
+            highestArr[3] = (fourthGenreTotal);
+            highestArr[4] = (fithGenreTotal);
+
+            highestGenre = highestArr.Max();
+            indexOfHighestGenre = Array.IndexOf(highestArr, highestGenre);
+
+            return foundMWG.ChosenGenres[highestGenre].ToString();
         }
     }
 }
