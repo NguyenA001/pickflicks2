@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using pickflicks2.Models;
+using pickflicks2.Services;
 
 namespace pickflicks2.Controllers
 {
@@ -18,7 +20,7 @@ namespace pickflicks2.Controllers
 
         // Create a MWG by MWGModel (will return a bool)
         [HttpPost("AddMovie")]
-        public bool AddMovie(MovieModel newMovie)
+        public bool AddMovie(MoviesModel newMovie)
         {
             return _data.AddMovie(newMovie);
         }
@@ -29,13 +31,23 @@ namespace pickflicks2.Controllers
         //push the movie title name, or id, into a temp array
         //loop through array and fetch the movie object from API
         //save the movie object into movie Model at the end of each loop
-        for(int i = 0; i< tempArr.Length; i++)
+        // for(int i = 0; i< tempArr.Length; i++)
+        // {
+        //     MoviesModel newMovieModel = new MoviesModel();
+        //     var FetchedMovieObject = 
+
+        // }
+
+        [HttpGet("GetMoviesByMWGId/{MWGID}")]
+        public IEnumerable<MoviesModel> GetMoviesByMWGId(int MWGId, int SessionId)
         {
-            MovieModel newMovieModel = new MovieModel();
-            var FetchedMovieObject = 
+            return _data.GetMoviesByMWGId(MWGId, SessionId);
+        } 
 
-        }
-
-
+        // [HttpPost("ClearMoviesByMWGId/{MWGID}/{SessionId}")]
+        // public bool ClearMoviesByMWGId(int MWGId, int SessionId)
+        // {
+        //     return _data.ClearMoviesByMWGId(MWGId, SessionId);
+        // } 
     }
 }

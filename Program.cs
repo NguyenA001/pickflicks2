@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<MWGService>();
 builder.Services.AddScoped<GenreRankingService>();
+builder.Services.AddScoped<MovieService>();
 
 var connectionString = builder.Configuration.GetConnectionString("MyConnectionString");
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));

@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using pickflicks2.Models;
+using pickflicks2.Services;
+using pickflicks2.Services.Context;
 
 namespace pickflicks2.Services
 {
@@ -13,11 +16,19 @@ namespace pickflicks2.Services
             _context = context;
         }
 
-        public bool AddMovie(MovieModel newMovie)
+        public bool AddMovie(MoviesModel newMovie)
         {
-            
+            bool result = false;
+
+            _context.Add(newMovie);
+            result = _context.SaveChanges() != 0;
+
+            return result; 
         }
 
-
+        public IEnumerable<MoviesModel> GetMoviesByMWGId(int MWGId, int SessionId)
+        {
+            return _context.MoviesInfo.Where(item => item.MWGId == MWGId && item.SessionId == SessionId);
+        } 
     }
 }

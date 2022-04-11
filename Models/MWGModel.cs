@@ -9,6 +9,7 @@ namespace pickflicks2.Models
         public string? MembersNames { get; set; } // String of each members' username
         public string? UserSuggestedMovies { get; set; } // String or objects of userSuggested movies members for sure want included
         public string? ChosenGenres {get; set;} //String of chosen genres before watching movie
+        public string? StreamingService {get; set; } 
         public bool IsDeleted { get; set; } // Soft delete
     }
 }
