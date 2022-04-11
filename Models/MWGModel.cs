@@ -12,3 +12,4 @@ namespace pickflicks2.Models
         public bool IsDeleted { get; set; } // Soft delete
     }
 }
+
