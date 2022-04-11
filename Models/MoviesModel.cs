@@ -13,7 +13,7 @@ namespace pickflicks2.Models
         public string? MovieName { get; set; }
         public string? MovieOverview { get; set; }
         public int MovieReleaseYear { get; set; }
-        public int MovieIMDBRating { get; set; }
+        public double MovieIMDBRating { get; set; }
         public string? MovieImage { get; set; }
     }
 }
