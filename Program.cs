@@ -9,6 +9,7 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<MWGService>();
 builder.Services.AddScoped<GenreRankingService>();
 builder.Services.AddScoped<MovieService>();
+builder.Services.AddScoped<MWGMatchService>();
 
 var connectionString = builder.Configuration.GetConnectionString("MyConnectionString");
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
