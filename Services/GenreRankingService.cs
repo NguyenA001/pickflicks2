@@ -86,7 +86,7 @@ namespace pickflicks2.Services
             MWGModel foundMWG =  _context.MWGInfo.SingleOrDefault(item => item.Id == MWGId);
 
             string chosenGenres = foundMWG.ChosenGenres;
-            // chosenGenres = 'drama,action,horror,comedey,history'
+            // chosenGenres = "Drama,Thriller,Comedy,Romance,ScienceFiction"
             
             List<GenreRankingModel> AllGenreRankingsWithMWGId = new List<GenreRankingModel>();
             AllGenreRankingsWithMWGId = _context.GenreRankingInfo.Where(item => item.MWGId == MWGId).ToList();
