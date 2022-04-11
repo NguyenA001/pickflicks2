@@ -60,7 +60,7 @@ namespace pickflicks2.Services
                 result = _context.SaveChanges() != 0;
             }
             return result;
-        } 
+        }
 
         public string GetTopRankedGenre(int MWGId) 
         {  
