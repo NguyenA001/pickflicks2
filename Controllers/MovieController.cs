@@ -38,7 +38,7 @@ namespace pickflicks2.Controllers
 
         // }
 
-        [HttpGet("GetMoviesByMWGId/{MWGID}")]
+        [HttpGet("GetMoviesByMWGId/{MWGId}/{SessionId}")]
         public IEnumerable<MoviesModel> GetMoviesByMWGId(int MWGId, int SessionId)
         {
             return _data.GetMoviesByMWGId(MWGId, SessionId);
