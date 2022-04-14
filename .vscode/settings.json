@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/f8cb959c-b440-4f96-a3b3-559487478f16/resourceGroups/pickflicks/providers/Microsoft.Web/sites/pickflicksapi2",
+    "appService.deploySubpath": "publish"
+}

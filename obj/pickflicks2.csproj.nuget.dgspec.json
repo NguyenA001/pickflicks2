@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\An Nguyen\\Desktop\\CodeStack\\LEVEL2\\pickflicks2\\pickflicks2.csproj": {}
+    "/Users/dylanmcfarlin/Desktop/CodeStack/Level-3/pickflicks-backend2/pickflicks2/pickflicks2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\An Nguyen\\Desktop\\CodeStack\\LEVEL2\\pickflicks2\\pickflicks2.csproj": {
+    "/Users/dylanmcfarlin/Desktop/CodeStack/Level-3/pickflicks-backend2/pickflicks2/pickflicks2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\An Nguyen\\Desktop\\CodeStack\\LEVEL2\\pickflicks2\\pickflicks2.csproj",
+        "projectUniqueName": "/Users/dylanmcfarlin/Desktop/CodeStack/Level-3/pickflicks-backend2/pickflicks2/pickflicks2.csproj",
         "projectName": "pickflicks2",
-        "projectPath": "C:\\Users\\An Nguyen\\Desktop\\CodeStack\\LEVEL2\\pickflicks2\\pickflicks2.csproj",
-        "packagesPath": "C:\\Users\\An Nguyen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\An Nguyen\\Desktop\\CodeStack\\LEVEL2\\pickflicks2\\obj\\",
+        "projectPath": "/Users/dylanmcfarlin/Desktop/CodeStack/Level-3/pickflicks-backend2/pickflicks2/pickflicks2.csproj",
+        "packagesPath": "/Users/dylanmcfarlin/.nuget/packages/",
+        "outputPath": "/Users/dylanmcfarlin/Desktop/CodeStack/Level-3/pickflicks-backend2/pickflicks2/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\An Nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/dylanmcfarlin/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -58,6 +58,10 @@
               "target": "Package",
               "version": "[6.0.3, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
@@ -81,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.201/RuntimeIdentifierGraph.json"
         }
       }
     }
