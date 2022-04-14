@@ -8,9 +8,17 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = pickflicks2
 build_property.RootNamespace = pickflicks2
+<<<<<<< HEAD
 build_property.ProjectDir = /Users/dylanmcfarlin/Desktop/CodeStack/Level-3/pickflicks-backend2/pickflicks2/
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = /Users/dylanmcfarlin/Desktop/CodeStack/Level-3/pickflicks-backend2/pickflicks2
+=======
+build_property.ProjectDir = c:\Users\An Nguyen\Desktop\CodeStack\LEVEL2\pickflicks2\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = c:\Users\An Nguyen\Desktop\CodeStack\LEVEL2\pickflicks2
+>>>>>>> 7eba77e381321c58da66bf8c867776d000103ba6
 build_property._RazorSourceGeneratorDebug = 
