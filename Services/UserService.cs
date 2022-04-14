@@ -207,5 +207,21 @@ namespace pickflicks2.Services
             }
             return result;
         }
+
+        // Edit user icon
+        public bool EditUserIcon(int userId, string iconName)
+        {
+            bool result = false;
+
+            var foundUser = _context.UserInfo.SingleOrDefault(user => user.Id == userId);
+
+            if (foundUser != null) {
+                foundUser.Icon = iconName; 
+
+                _context.Update<UserModel>(foundUser);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
     }
 }

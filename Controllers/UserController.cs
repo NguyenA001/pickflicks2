@@ -74,5 +74,12 @@ namespace pickflicks2.Controllers
         {
             return _data.RemoveFavoriteMWG(userId, MWGId);
         }
+
+        // Edit user icon
+        [HttpPost("EditUserIcon/{userId}/{iconName}")]
+        public bool EditUserIcon(int userId, string iconName)
+        {
+            return _data.EditUserIcon(userId, iconName);
+        }
     }
 }
