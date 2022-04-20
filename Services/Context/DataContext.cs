@@ -107,6 +107,7 @@ namespace pickflicks2.Services.Context
                     GroupCreatorId = 1,
                     MembersId = "1,2,3",
                     MembersNames = "Dylan,Sophie,An",
+                    MembersIcons = "boy1,girl5,boy2",
                     UserSuggestedMovies = "Toy Story 3, Wolf of Wallstreet",
                     ChosenGenres = "Drama,Thriller,Comedy,Romance,ScienceFiction",
                     IsDeleted = false
@@ -117,6 +118,7 @@ namespace pickflicks2.Services.Context
                     GroupCreatorId = 2,
                     MembersId = "1,2,4",
                     MembersNames = "Dylan,Sophie,Angel",
+                    MembersIcons = "boy1,girl5,boy3",
                     UserSuggestedMovies = "Encanto",
                     ChosenGenres = "Drama,Thriller,Comedy,Romance,ScienceFiction",
                     IsDeleted = false
@@ -127,6 +129,7 @@ namespace pickflicks2.Services.Context
                     GroupCreatorId = 3,
                     MembersId = "1,2,3,5",
                     MembersNames = "Dylan,Sophie,An,JT",
+                    MembersIcons = "boy1,girl5,boy2,boy6",
                     UserSuggestedMovies = "Frozen lol",
                     ChosenGenres = "Drama,Thriller,Comedy,Romance,ScienceFiction",
                     IsDeleted = false
