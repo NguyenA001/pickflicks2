@@ -24,24 +24,18 @@ namespace pickflicks2.Controllers
         {
             return _data.AddMovie(newMovie);
         }
-        //genre is selected
-        //do initial fetch using genre and streaming service to get the total number of pages
-        //get a random number between 0-total then fetch using that number as a page parameter
-        //get 15 random numbers from 0-250, each number will be the index value of a random movie
-        //push the movie title name, or id, into a temp array
-        //loop through array and fetch the movie object from API
-        //save the movie object into movie Model at the end of each loop
-        // for(int i = 0; i< tempArr.Length; i++)
-        // {
-        //     MoviesModel newMovieModel = new MoviesModel();
-        //     var FetchedMovieObject = 
 
-        // }
 
         [HttpGet("GetMoviesByMWGId/{MWGId}/{SessionId}")]
         public IEnumerable<MoviesModel> GetMoviesByMWGId(int MWGId, int SessionId)
         {
             return _data.GetMoviesByMWGId(MWGId, SessionId);
+        } 
+
+        [HttpGet("GetMovies")]
+        public IEnumerable<MoviesModel> GetMovies()
+        {
+            return _data.GetMovies();
         } 
 
         // [HttpPost("ClearMoviesByMWGId/{MWGID}/{SessionId}")]

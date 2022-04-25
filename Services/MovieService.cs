@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using pickflicks2.Models;
 using pickflicks2.Services;
 using pickflicks2.Services.Context;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace pickflicks2.Services
 {
@@ -30,5 +32,14 @@ namespace pickflicks2.Services
         {
             return _context.MoviesInfo.Where(item => item.MWGId == MWGId && item.SessionId == SessionId);
         } 
+
+        
+        public IEnumerable<MoviesModel> GetMovies()
+        {
+           
+        } 
+
+        
+        
     }
 }

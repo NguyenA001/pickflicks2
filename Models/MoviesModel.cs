@@ -15,5 +15,7 @@ namespace pickflicks2.Models
         public int MovieReleaseYear { get; set; }
         public double MovieIMDBRating { get; set; }
         public string? MovieImage { get; set; }
+
+        public MoviesModel() {}
     }
 }
