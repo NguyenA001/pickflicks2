@@ -43,5 +43,11 @@ namespace pickflicks2.Controllers
         // {
         //     return _data.ClearMoviesByMWGId(MWGId, SessionId);
         // } 
+
+        [HttpGet("TestPageNumber")]
+        public async Task<int> TestPageNumber()
+        {
+            return await _data.TestPageNumber();
+        } 
     }
 }
