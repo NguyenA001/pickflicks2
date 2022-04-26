@@ -175,5 +175,19 @@ namespace pickflicks2.Services
             _context.Update<MWGModel>(MWG);
             return _context.SaveChanges() != 0;
         }
+
+        public bool AddChosenGenres(int MWGId, string chosenGenres)
+        {
+            bool result = false;
+            MWGModel foundMWG = GetMWGById(MWGId);
+            if (foundMWG != null)
+            {
+                // Append the new userId into the string
+                foundMWG.ChosenGenres = chosenGenres;
+                _context.Update<MWGModel>(foundMWG);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
     }
 }

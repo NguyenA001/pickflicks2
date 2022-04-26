@@ -107,5 +107,11 @@ namespace pickflicks2.Controllers
         {
             return _data.EditMWG(MWG);
         }
+
+        [HttpPost("AddChosenGenres/{MWGId}/{chosenGenres}")]
+        public bool AddChosenGenres(int MWGId, string chosenGenres)
+        {
+            return _data.AddChosenGenres(MWGId, chosenGenres);
+        }
     }
 }
