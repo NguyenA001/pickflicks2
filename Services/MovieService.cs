@@ -34,10 +34,10 @@ namespace pickflicks2.Services
         } 
 
         
-        public IEnumerable<MoviesModel> GetMovies()
-        {
+        // public IEnumerable<MoviesModel> GetMovies()
+        // {
            
-        } 
+        // } 
 
         
         

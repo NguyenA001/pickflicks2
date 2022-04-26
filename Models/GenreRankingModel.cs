@@ -8,8 +8,8 @@ namespace pickflicks2.Models
         public int Genre1 { get; set; }    
         public int Genre2 { get; set; }    
         public int Genre3 { get; set; }    
-        public int Genre4 { get; set; }    
-        public int Genre5 { get; set; }    
+        // public int Genre4 { get; set; }    
+        // public int Genre5 { get; set; }    
         // public int Biography { get; set; }
         // public int FilmNoir { get; set; }
         // public int Musical { get; set; }

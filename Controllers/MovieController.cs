@@ -32,11 +32,11 @@ namespace pickflicks2.Controllers
             return _data.GetMoviesByMWGId(MWGId, SessionId);
         } 
 
-        [HttpGet("GetMovies")]
-        public IEnumerable<MoviesModel> GetMovies()
-        {
-            return _data.GetMovies();
-        } 
+        // [HttpGet("GetMovies")]
+        // public IEnumerable<MoviesModel> GetMovies()
+        // {
+        //     return _data.GetMovies();
+        // } 
 
         // [HttpPost("ClearMoviesByMWGId/{MWGID}/{SessionId}")]
         // public bool ClearMoviesByMWGId(int MWGId, int SessionId)

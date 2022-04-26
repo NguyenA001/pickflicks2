@@ -146,8 +146,8 @@ namespace pickflicks2.Services.Context
                     Genre1 = 1,
                     Genre2 = 1,
                     Genre3= 1,
-                    Genre4 = 1,
-                    Genre5 = 2,
+                    // Genre4 = 1,
+                    // Genre5 = 2,
                 },
                 new GenreRankingModel() {
                     Id = 2,
@@ -156,8 +156,8 @@ namespace pickflicks2.Services.Context
                     Genre1 = 1,
                     Genre2 = 1,
                     Genre3= 1,
-                    Genre4 = 1,
-                    Genre5 = 2,
+                    // Genre4 = 1,
+                    // Genre5 = 2,
                 }
             };
            builder.Entity<GenreRankingModel>().HasData(GenreRankingData);

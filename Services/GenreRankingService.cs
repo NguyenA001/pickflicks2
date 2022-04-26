@@ -53,8 +53,8 @@ namespace pickflicks2.Services
                 Group.Genre1 = 0;
                 Group.Genre2 = 0;
                 Group.Genre3 = 0;
-                Group.Genre4 = 0;
-                Group.Genre5 = 0;
+                // Group.Genre4 = 0;
+                // Group.Genre5 = 0;
 
                 _context.Update<GenreRankingModel>(Group);
                 result = _context.SaveChanges() != 0;
@@ -76,10 +76,10 @@ namespace pickflicks2.Services
             int firstGenreTotal = 0;
             int secondGenreTotal = 0;
             int thirdGenreTotal = 0;
-            int fourthGenreTotal = 0;
-            int fithGenreTotal = 0;
+            // int fourthGenreTotal = 0;
+            // int fithGenreTotal = 0;
 
-            int[] highestArr = new int[5];
+            int[] highestArr = new int[3];
             int indexOfHighestGenre = 0; 
             int highestGenre;
 
@@ -87,21 +87,21 @@ namespace pickflicks2.Services
                 int firstGenre = AllGenreRankingsWithMWGId[i].Genre1;  // set firstGenere to drama's int value 
                 int secondGenre = AllGenreRankingsWithMWGId[i].Genre2; 
                 int thirdGenre = AllGenreRankingsWithMWGId[i].Genre3; 
-                int fourthGenre = AllGenreRankingsWithMWGId[i].Genre4; 
-                int fithGenre = AllGenreRankingsWithMWGId[i].Genre5; 
+                // int fourthGenre = AllGenreRankingsWithMWGId[i].Genre4; 
+                // int fithGenre = AllGenreRankingsWithMWGId[i].Genre5; 
 
                 firstGenreTotal += firstGenre;
                 secondGenreTotal += secondGenre;
                 thirdGenreTotal += thirdGenre;
-                fourthGenreTotal += fourthGenre;
-                fithGenreTotal += fithGenre;
+                // fourthGenreTotal += fourthGenre;
+                // fithGenreTotal += fithGenre;
                 
             }
             highestArr[0] = (firstGenreTotal);
             highestArr[1] = (secondGenreTotal);
             highestArr[2] = (thirdGenreTotal);
-            highestArr[3] = (fourthGenreTotal);
-            highestArr[4] = (fithGenreTotal);
+            // highestArr[3] = (fourthGenreTotal);
+            // highestArr[4] = (fithGenreTotal);
 
             highestGenre = highestArr.Max();
             indexOfHighestGenre = Array.IndexOf(highestArr, highestGenre);
