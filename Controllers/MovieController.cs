@@ -57,6 +57,12 @@ namespace pickflicks2.Controllers
             return await _data.UseRandomPageNumberToGetRandomListOfMovieTitles();
         } 
 
+        // [HttpGet("UseRandomPageNumberToGetRandomListOfMovieTitles")]
+        // public async Task<List<string>> UseRandomPageNumberToGetRandomListOfMovieTitles()
+        // {
+        //     return await _data.UseRandomPageNumberToGetRandomListOfMovieTitles();
+        // } 
+
 
     }
 }

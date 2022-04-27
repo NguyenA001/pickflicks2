@@ -86,8 +86,6 @@ namespace pickflicks2.Services
             }
             catch (Exception exception)
             {
-                //Console.WriteLine("Exception Hit------------");
-                //Console.WriteLine(exception);
                 return 111;
             }
         } 
@@ -148,14 +146,12 @@ namespace pickflicks2.Services
             }
             catch (Exception exception)
             {
-                //Console.WriteLine("Exception Hit------------");
-                //Console.WriteLine(exception);
                 List<string> randomMovies = new List<string>();
-                                return randomMovies;
+                return randomMovies;
             }
         }
 
-            //return list, turn into array, map through it and create a new MovieModel
+        //return list, turn into array, map through it and create a new MovieModel
         // public bool AddMovie1(MoviesModel newMovie)
         // {
         //     Task<List<int>> randomList = UseRandomPageNumberToGetRandomListOfNums();
