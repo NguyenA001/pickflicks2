@@ -143,6 +143,7 @@ namespace pickflicks2.Services.Context
                     Id = 1,
                     MWGId = 1,
                     UserId = 1,
+                    MembersId = "1,2,3",
                     Genre1 = 1,
                     Genre2 = 1,
                     Genre3= 1,
@@ -153,12 +154,24 @@ namespace pickflicks2.Services.Context
                     Id = 2,
                     MWGId = 1,
                     UserId = 2,
+                    MembersId = "1,2,3",
                     Genre1 = 1,
                     Genre2 = 1,
                     Genre3= 1,
                     // Genre4 = 1,
                     // Genre5 = 2,
-                }
+                },
+                new GenreRankingModel() {
+                    Id = 3,
+                    MWGId = 1,
+                    UserId = 3,
+                    MembersId = "1,2,3",
+                    Genre1 = 5,
+                    Genre2 = 2,
+                    Genre3= 4,
+                    // Genre4 = 1,
+                    // Genre5 = 2,
+                },
             };
            builder.Entity<GenreRankingModel>().HasData(GenreRankingData);
         }

@@ -31,6 +31,12 @@ namespace pickflicks2.Controllers
             return _data.GetGenreRankingsByMWGId(MWGId);
         } 
 
+        [HttpGet("GetMostRecentGenreRankingsByMWGId/{MWGId}")]
+        public List<GenreRankingModel> GetMostRecentGenreRankingsByMWGId(int MWGId)
+        {
+            return _data.GetMostRecentGenreRankingsByMWGId(MWGId);
+        } 
+
         [HttpGet("GetGenreRankingsByUserId/{UserId}")]
         public IEnumerable<GenreRankingModel> GetGenreRankingsByUserId(int UserId)
         {
