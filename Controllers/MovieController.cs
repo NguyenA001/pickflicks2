@@ -44,10 +44,19 @@ namespace pickflicks2.Controllers
         //     return _data.ClearMoviesByMWGId(MWGId, SessionId);
         // } 
 
+        //need to get genre and change base URL
         [HttpGet("TestPageNumber")]
         public async Task<int> TestPageNumber()
         {
             return await _data.TestPageNumber();
         } 
+
+        [HttpGet("UseRandomPageNumberToGetRandomListOfNums")]
+        public async Task<List<int>> UseRandomPageNumberToGetRandomListOfNums()
+        {
+            return await _data.UseRandomPageNumberToGetRandomListOfNums();
+        } 
+
+
     }
 }
