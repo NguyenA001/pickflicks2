@@ -181,21 +181,21 @@ namespace pickflicks2.Services
                 case "Action" :
                     genreId = 1;
                     break;
-                case "Action & Adventure" :
-                    genreId = 39;
-                    break;
-                case "Adult" :
-                    genreId = 30;
-                    break;
+                // case "Action & Adventure" :
+                //     genreId = 39;
+                //     break;
+                // case "Adult" :
+                //     genreId = 30;
+                //     break;
                 case "Animation" :
                     genreId = 3;
                     break;
-                case "Anime" :
-                    genreId = 33;
-                    break;
-                case "Biography" :
-                    genreId = 31;
-                    break;
+                // case "Anime" :
+                //     genreId = 33;
+                //     break;
+                // case "Biography" :
+                //     genreId = 31;
+                //     break;
                 case "Comedy" :
                     genreId = 4;
                     break;
@@ -214,11 +214,11 @@ namespace pickflicks2.Services
                 case "History" :
                     genreId = 10;
                     break;
-                case "Kids" :
-                    genreId = 21;
-                    break;
-                case "Musical" :
-                    genreId = 32;
+                // case "Kids" :
+                //     genreId = 21;
+                //     break;
+                case "Music" :
+                    genreId = 12;
                     break;
                 case "Mystery" :
                     genreId = 13;
@@ -226,23 +226,23 @@ namespace pickflicks2.Services
                 case "Romance" :
                     genreId = 14;
                     break;
-                case "Sci-Fi & Fantasy" :
-                    genreId = 40;
-                    break;
+                // case "Sci-Fi & Fantasy" :
+                //     genreId = 40;
+                //     break;
                 case "Science Fiction" :
                     genreId = 15;
                     break;
-                case "Sports" :
-                    genreId = 29;
-                    break;
-                case "Supernatural" :
-                    genreId = 37;
-                    break;
+                // case "Sports" :
+                //     genreId = 29;
+                //     break;
+                // case "Supernatural" :
+                //     genreId = 37;
+                //     break;
                 case "Thriller" :
                     genreId = 17;
                     break;
-                case "War & Politics" :
-                    genreId = 41;
+                case "War" :
+                    genreId = 18;
                     break;
                 case "Western" :
                     genreId = 19;

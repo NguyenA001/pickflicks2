@@ -33,23 +33,23 @@ namespace pickflicks2.Controllers
         } 
 
         //need to get genre and change base URL
-        [HttpGet("TestPageNumber/{genreId}")]
-        public async Task<int> TestPageNumber(int genreId)
+        [HttpGet("TestPageNumber/{genreId}/{streamingServiceId}")]
+        public async Task<int> TestPageNumber(int genreId, int streamingServiceId)
         {
-            return await _data.TestPageNumber(genreId);
+            return await _data.TestPageNumber(genreId, streamingServiceId);
         } 
 
-        [HttpGet("UseRandomPageNumberToGetRandomListOfMovieTitles/{genreId}")]
-        public async Task<List<string>> UseRandomPageNumberToGetRandomListOfMovieTitles(int genreId)
+        [HttpGet("UseRandomPageNumberToGetRandomListOfMovieIds/{genreId}/{streamingServiceId}")]
+        public async Task<List<string>> UseRandomPageNumberToGetRandomListOfMovieIds(int genreId, int streamingServiceId)
         {
-            return await _data.UseRandomPageNumberToGetRandomListOfMovieTitles(genreId);
+            return await _data.UseRandomPageNumberToGetRandomListOfMovieIds(genreId, streamingServiceId);
         } 
 
 
-        [HttpGet("AddAll15Movies/{MWGId}/{genreId}")]
-        public async Task<bool> AddAll15Movies(int MWGId, int genreId)
+        [HttpGet("AddAll15Movies/{MWGId}/{genreId}/{streamingServiceId}")]
+        public async Task<bool> AddAll15Movies(int MWGId, int genreId, int streamingServiceId)
         {
-            return await _data.AddAll15Movies(MWGId, genreId);
+            return await _data.AddAll15Movies(MWGId, genreId, streamingServiceId);
         } 
 
 
