@@ -33,23 +33,23 @@ namespace pickflicks2.Controllers
         } 
 
         //need to get genre and change base URL
-        [HttpGet("TestPageNumber")]
-        public async Task<int> TestPageNumber()
+        [HttpGet("TestPageNumber/{genreId}")]
+        public async Task<int> TestPageNumber(int genreId)
         {
-            return await _data.TestPageNumber();
+            return await _data.TestPageNumber(genreId);
         } 
 
-        [HttpGet("UseRandomPageNumberToGetRandomListOfMovieTitles")]
-        public async Task<List<string>> UseRandomPageNumberToGetRandomListOfMovieTitles()
+        [HttpGet("UseRandomPageNumberToGetRandomListOfMovieTitles/{genreId}")]
+        public async Task<List<string>> UseRandomPageNumberToGetRandomListOfMovieTitles(int genreId)
         {
-            return await _data.UseRandomPageNumberToGetRandomListOfMovieTitles();
+            return await _data.UseRandomPageNumberToGetRandomListOfMovieTitles(genreId);
         } 
 
 
-        [HttpGet("AddAll15Movies/{MWGId}")]
-        public async Task<bool> AddAll15Movies(int MWGId)
+        [HttpGet("AddAll15Movies/{MWGId}/{genreId}")]
+        public async Task<bool> AddAll15Movies(int MWGId, int genreId)
         {
-            return await _data.AddAll15Movies(MWGId);
+            return await _data.AddAll15Movies(MWGId, genreId);
         } 
 
 
