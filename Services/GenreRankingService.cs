@@ -117,7 +117,7 @@ namespace pickflicks2.Services
             return result;
         }
 
-        public string GetTopRankedGenre(int MWGId) 
+        public int GetTopRankedGenre(int MWGId) 
         {  
             // Get MWG from MWGID
             MWGModel foundMWG =  _context.MWGInfo.SingleOrDefault(item => item.Id == MWGId);
@@ -167,7 +167,92 @@ namespace pickflicks2.Services
             foreach (string genre in chosenGenres.Split(','))
                 genrelist.Add(genre);
 
-            return genrelist[indexOfHighestGenre].ToString();
+            string genreString = genrelist[indexOfHighestGenre].ToString();
+
+            int genreId;
+            switch(genreString)
+            {
+                case "Horror" :
+                    genreId = 10;
+                    break;
+                case "Drama" :
+                    genreId = 7;
+                    break;
+                case "Action" :
+                    genreId = 1;
+                    break;
+                case "Action & Adventure" :
+                    genreId = 39;
+                    break;
+                case "Adult" :
+                    genreId = 30;
+                    break;
+                case "Animation" :
+                    genreId = 3;
+                    break;
+                case "Anime" :
+                    genreId = 33;
+                    break;
+                case "Biography" :
+                    genreId = 31;
+                    break;
+                case "Comedy" :
+                    genreId = 4;
+                    break;
+                case "Crime" :
+                    genreId = 5;
+                    break;
+                case "Documentary" :
+                    genreId = 6;
+                    break;
+                case "Family" :
+                    genreId = 8;
+                    break;
+                case "Fantasy" :
+                    genreId = 9;
+                    break;
+                case "History" :
+                    genreId = 10;
+                    break;
+                case "Kids" :
+                    genreId = 21;
+                    break;
+                case "Musical" :
+                    genreId = 32;
+                    break;
+                case "Mystery" :
+                    genreId = 13;
+                    break;
+                case "Romance" :
+                    genreId = 14;
+                    break;
+                case "Sci-Fi & Fantasy" :
+                    genreId = 40;
+                    break;
+                case "Science Fiction" :
+                    genreId = 15;
+                    break;
+                case "Sports" :
+                    genreId = 29;
+                    break;
+                case "Supernatural" :
+                    genreId = 37;
+                    break;
+                case "Thriller" :
+                    genreId = 17;
+                    break;
+                case "War & Politics" :
+                    genreId = 41;
+                    break;
+                case "Western" :
+                    genreId = 19;
+                    break;
+                default :
+                    genreId = 0;
+                    break;
+            }
+
+            return genreId;
         }
 
         

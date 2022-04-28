@@ -30,9 +30,9 @@ namespace pickflicks2.Services
             return _context.MoviesInfo.Where(item => item.MWGId == MWGId);
         } 
 
-        public async Task<int> TestPageNumber()
+        public async Task<int> TestPageNumber(int genreId)
         {
-            string baseUrl = "https://api.watchmode.com/v1/list-titles/?apiKey=h4xYuoaDgHHU19yy6I3jDqjH7ZoPQ9ruXtNJ6buj&types=movie&genres=4&page=1&source_ids=203&regions=US";
+            string baseUrl = $"https://api.watchmode.com/v1/list-titles/?apiKey=h4xYuoaDgHHU19yy6I3jDqjH7ZoPQ9ruXtNJ6buj&types=movie&genres={genreId}&page=1&source_ids=203&regions=US";
             //Have your using statements within a try/catch blokc that will catch any exceptions.
             try
             {
@@ -85,10 +85,10 @@ namespace pickflicks2.Services
 
 
         //fetch using random page number
-        public async Task<List<string>> UseRandomPageNumberToGetRandomListOfMovieTitles()
+        public async Task<List<string>> UseRandomPageNumberToGetRandomListOfMovieTitles(int genreId)
         {
-            Task<int> pageNum = TestPageNumber();
-            string baseUrl = $"https://api.watchmode.com/v1/list-titles/?apiKey=h4xYuoaDgHHU19yy6I3jDqjH7ZoPQ9ruXtNJ6buj&types=movie&genres=4&page={pageNum}&source_ids=203&regions=US";
+            Task<int> pageNum = TestPageNumber(genreId);
+            string baseUrl = $"https://api.watchmode.com/v1/list-titles/?apiKey=h4xYuoaDgHHU19yy6I3jDqjH7ZoPQ9ruXtNJ6buj&types=movie&genres={genreId}&page={pageNum}&source_ids=203&regions=US";
             //Have your using statements within a try/catch blokc that will catch any exceptions.
             try
             {
@@ -139,14 +139,14 @@ namespace pickflicks2.Services
         }
 
 
-        public async Task<bool> AddAll15Movies(int MWGId)
+        public async Task<bool> AddAll15Movies(int MWGId, int genreId)
         {
             bool result = false;
-            var randomMovies= await UseRandomPageNumberToGetRandomListOfMovieTitles();
+            var randomMovies= await UseRandomPageNumberToGetRandomListOfMovieTitles(genreId);
 
             foreach (string movie in randomMovies)
             {
-                 string baseUrl = $"https://api.watchmode.com/v1/title/{movie}/details/?apiKey=h4xYuoaDgHHU19yy6I3jDqjH7ZoPQ9ruXtNJ6buj";
+                string baseUrl = $"https://api.watchmode.com/v1/title/{movie}/details/?apiKey=h4xYuoaDgHHU19yy6I3jDqjH7ZoPQ9ruXtNJ6buj";
             try
             {
                 using (HttpClient client = new HttpClient())

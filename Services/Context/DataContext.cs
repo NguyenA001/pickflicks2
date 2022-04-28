@@ -109,7 +109,7 @@ namespace pickflicks2.Services.Context
                     MembersNames = "Dylan,Sophie,An",
                     MembersIcons = "boy1,girl5,boy2",
                     UserSuggestedMovies = "Toy Story 3, Wolf of Wallstreet",
-                    ChosenGenres = "Drama,Thriller,Comedy,Romance,ScienceFiction",
+                    ChosenGenres = "Drama,Thriller,Comedy",
                     IsDeleted = false
                 },
                 new MWGModel() {
@@ -120,7 +120,7 @@ namespace pickflicks2.Services.Context
                     MembersNames = "Dylan,Sophie,Angel",
                     MembersIcons = "boy1,girl5,boy3",
                     UserSuggestedMovies = "Encanto",
-                    ChosenGenres = "Drama,Thriller,Comedy,Romance,ScienceFiction",
+                    ChosenGenres = "Drama,Thriller,Comedy",
                     IsDeleted = false
                 },
                 new MWGModel() {
@@ -131,7 +131,7 @@ namespace pickflicks2.Services.Context
                     MembersNames = "Dylan,Sophie,An,JT",
                     MembersIcons = "boy1,girl5,boy2,boy6",
                     UserSuggestedMovies = "Frozen lol",
-                    ChosenGenres = "Drama,Thriller,Comedy,Romance,ScienceFiction",
+                    ChosenGenres = "Drama,Thriller,Comedy",
                     IsDeleted = false
                 },
             };
