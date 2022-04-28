@@ -26,23 +26,11 @@ namespace pickflicks2.Controllers
         }
 
 
-        [HttpGet("GetMoviesByMWGId/{MWGId}/{SessionId}")]
-        public IEnumerable<MoviesModel> GetMoviesByMWGId(int MWGId, int SessionId)
+        [HttpGet("GetMoviesByMWGId/{MWGId}")]
+        public IEnumerable<MoviesModel> GetMoviesByMWGId(int MWGId)
         {
-            return _data.GetMoviesByMWGId(MWGId, SessionId);
+            return _data.GetMoviesByMWGId(MWGId);
         } 
-
-        // [HttpGet("GetMovies")]
-        // public IEnumerable<MoviesModel> GetMovies()
-        // {
-        //     return _data.GetMovies();
-        // } 
-
-        // [HttpPost("ClearMoviesByMWGId/{MWGID}/{SessionId}")]
-        // public bool ClearMoviesByMWGId(int MWGId, int SessionId)
-        // {
-        //     return _data.ClearMoviesByMWGId(MWGId, SessionId);
-        // } 
 
         //need to get genre and change base URL
         [HttpGet("TestPageNumber")]
@@ -57,11 +45,12 @@ namespace pickflicks2.Controllers
             return await _data.UseRandomPageNumberToGetRandomListOfMovieTitles();
         } 
 
-        // [HttpGet("UseRandomPageNumberToGetRandomListOfMovieTitles")]
-        // public async Task<List<string>> UseRandomPageNumberToGetRandomListOfMovieTitles()
-        // {
-        //     return await _data.UseRandomPageNumberToGetRandomListOfMovieTitles();
-        // } 
+
+        [HttpGet("AddAll15Movies/{MWGId}")]
+        public async Task<bool> AddAll15Movies(int MWGId)
+        {
+            return await _data.AddAll15Movies(MWGId);
+        } 
 
 
     }

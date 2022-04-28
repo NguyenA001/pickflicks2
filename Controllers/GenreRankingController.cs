@@ -24,6 +24,7 @@ namespace pickflicks2.Controllers
         {
             return _data.AddGenreRankings(newGenreRankingModel);
         }
+        
 
         [HttpGet("GetGenreRankingsByMWGId/{MWGId}")]
         public IEnumerable<GenreRankingModel> GetGenreRankingsByMWGId(int MWGId)

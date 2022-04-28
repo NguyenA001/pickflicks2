@@ -169,5 +169,7 @@ namespace pickflicks2.Services
 
             return genrelist[indexOfHighestGenre].ToString();
         }
+
+        
     }
 }

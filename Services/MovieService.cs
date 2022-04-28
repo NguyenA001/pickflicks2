@@ -17,27 +17,19 @@ namespace pickflicks2.Services
         {
             _context = context;
         }
-
         public bool AddMovie(MoviesModel newMovie)
         {
             bool result = false;
-
             _context.Add(newMovie);
             result = _context.SaveChanges() != 0;
-
             return result; 
         }
 
-        public IEnumerable<MoviesModel> GetMoviesByMWGId(int MWGId, int SessionId)
+        public IEnumerable<MoviesModel> GetMoviesByMWGId(int MWGId)
         {
-            return _context.MoviesInfo.Where(item => item.MWGId == MWGId && item.SessionId == SessionId);
+            return _context.MoviesInfo.Where(item => item.MWGId == MWGId);
         } 
 
-        
-        // public IEnumerable<MoviesModel> GetMovies()
-        // {
-           
-        // } 
         public async Task<int> TestPageNumber()
         {
             string baseUrl = "https://api.watchmode.com/v1/list-titles/?apiKey=h4xYuoaDgHHU19yy6I3jDqjH7ZoPQ9ruXtNJ6buj&types=movie&genres=4&page=1&source_ids=203&regions=US";
@@ -126,12 +118,7 @@ namespace pickflicks2.Services
                                 List<string> randomMovies = new List<string>();
                                 foreach(int i in listNumbers)
                                 {
-                                    //casting
-                                    //var randTitle = dataObj["titles"][i]["title"].ToString();
-                                    randomMovies.Add(dataObj["titles"][i]["title"].ToString());
-
-                                    //var randTitle = (string)dataObj["titles"][i]["title"];
-                                    //randomMovies.Add(randTitle);
+                                    randomMovies.Add(dataObj["titles"][i]["id"].ToString());
                                 }
                                 return randomMovies;
                             }
@@ -151,31 +138,56 @@ namespace pickflicks2.Services
             }
         }
 
-        //return list, turn into array, map through it and create a new MovieModel
-        // public bool AddMovie1(MoviesModel newMovie)
-        // {
-        //     Task<List<int>> randomList = UseRandomPageNumberToGetRandomListOfNums();
-        //     int [] randomArr = randomList.ToArray();
-        //     bool result = false;
 
-        //     foreach(int i in randomArr)
-        //     {
-        //         MoviesModel newMoviesModel = new MoviesModel();
+        public async Task<bool> AddAll15Movies(int MWGId)
+        {
+            bool result = false;
+            var randomMovies= await UseRandomPageNumberToGetRandomListOfMovieTitles();
 
+            foreach (string movie in randomMovies)
+            {
+                 string baseUrl = $"https://api.watchmode.com/v1/title/{movie}/details/?apiKey=h4xYuoaDgHHU19yy6I3jDqjH7ZoPQ9ruXtNJ6buj";
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage res = await client.GetAsync(baseUrl))
+                    {
+                        using (HttpContent content = res.Content)
+                        {
+                            string data = await content.ReadAsStringAsync();
+                            if (data != null)
+                            {
+                                //Parse your data into a object.
+                                var dataObj = JObject.Parse(data);
+                                MoviesModel newMM = new MoviesModel();
+                                newMM.Id = 0;
+                                newMM.MWGId = MWGId;
+                                newMM.SessionId = 0;
+                                newMM.MovieName = dataObj["title"].ToString();
+                                newMM.MovieOverview = dataObj["plot_overview"].ToString();
+                                newMM.MovieReleaseYear = (int)dataObj["year"];
+                                newMM.MovieIMDBRating = (double)dataObj["user_rating"];
+                                newMM.MovieImage = dataObj["poster"].ToString();
 
-        //         newMoviesModel.Id = 0;
-        //         newMoviesModel.MWGId = 1;
-        //         newMoviesModel.SessionId = 2;
-        //         newMoviesModel.MovieName = 
-        //         newMoviesModel
-        //         newMoviesModel
-        //     }
-
-        //     _context.Add(newMovie);
-        //     result = _context.SaveChanges() != 0;
-
-        //     return result; 
-        // }
-
+                                _context.Add(newMM);
+                                result = _context.SaveChanges() != 0;
+                            }
+                            else
+                            {
+                                return result;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+                {
+                    return result;
+                }
+            }
+            result = true;
+            return result;
+        }
     }
 }
