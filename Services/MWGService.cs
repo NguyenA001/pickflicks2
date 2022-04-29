@@ -189,5 +189,19 @@ namespace pickflicks2.Services
             }
             return result;
         }
+
+        public bool AddChosenGenres(int MWGId, string serviceId)
+        {
+         bool result = false;
+            MWGModel foundMWG = GetMWGById(MWGId);
+            if (foundMWG != null)
+            {
+                // Append the new userId into the string
+                foundMWG.StreamingService = serviceId;
+                _context.Update<MWGModel>(foundMWG);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
     }
 }

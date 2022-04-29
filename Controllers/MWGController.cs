@@ -113,5 +113,11 @@ namespace pickflicks2.Controllers
         {
             return _data.AddChosenGenres(MWGId, chosenGenres);
         }
+
+        [HttpPost("AddStreamingService/{MWGId}/{serviceId}")]
+        public bool AddChosenGenres(int MWGId, string serviceId)
+        {
+            return _data.AddChosenGenres(MWGId, serviceId);
+        }
     }
 }
