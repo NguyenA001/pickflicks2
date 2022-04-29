@@ -38,5 +38,11 @@ namespace pickflicks2.Controllers
         {
             return _data.GetAllMWGMatchModels();
         }
+
+        [HttpGet("GetTopMovieByMWGId/{MWGId}")]
+        public  List<string>  GetTopMovieByMWGId(int MWGId)
+        {
+            return _data.GetTopMovieByMWGId(MWGId);
+        }
     }
 }
