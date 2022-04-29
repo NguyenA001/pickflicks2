@@ -190,7 +190,7 @@ namespace pickflicks2.Services
             return result;
         }
 
-        public bool AddChosenGenres(int MWGId, string serviceId)
+        public bool AddStreamingService(int MWGId, string serviceId)
         {
          bool result = false;
             MWGModel foundMWG = GetMWGById(MWGId);

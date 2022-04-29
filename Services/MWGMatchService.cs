@@ -12,10 +12,26 @@ namespace pickflicks2.Services
             _context = context;
         }
 
+        //use to add and update
         public bool AddLikeOrDislike(MWGMatchModel updatedModel)
         {
             _context.Update<MWGMatchModel>(updatedModel);
             return _context.SaveChanges() != 0;
+        }
+
+        public IEnumerable<MWGMatchModel> GetMWGMatchModelsByUserId(int userId)
+        {
+            return _context.MWGMatchInfo.Where(item => item.UserId == userId);
+        }
+
+        public IEnumerable<MWGMatchModel> GetMWGMatchModelsByMWGId(int MWGId)
+        {
+            return _context.MWGMatchInfo.Where(item => item.MWGId == MWGId);
+        }
+
+        public IEnumerable<MWGMatchModel> GetAllMWGMatchModels()
+        {
+            return _context.MWGMatchInfo;
         }
     }
 }
