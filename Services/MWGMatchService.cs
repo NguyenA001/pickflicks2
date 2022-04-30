@@ -1,6 +1,7 @@
 using pickflicks2.Models;
 using pickflicks2.Services;
 using pickflicks2.Services.Context;
+using System.Linq;
 
 namespace pickflicks2.Services
 {
@@ -34,7 +35,7 @@ namespace pickflicks2.Services
             return _context.MWGMatchInfo;
         }
 
-        public List<int> GetTopMovieByMWGId(int MWGId)
+        public int GetTopMovieByMWGId(int MWGId)
         {
             List<MWGMatchModel> AllLikeDislikesOfMWGId = new List<MWGMatchModel>();
             AllLikeDislikesOfMWGId =  _context.MWGMatchInfo.Where(item => item.MWGId == MWGId).ToList();
@@ -43,70 +44,94 @@ namespace pickflicks2.Services
             string membersId = foundMWG.MembersId;
 
             List<int> MWGmembersIdlist = new List<int>();
+            //turns string membersId into a list of ints
             foreach (string memberId in membersId.Split(','))
-            
             MWGmembersIdlist.Add(Int32.Parse(memberId));
             
 
             List<MWGMatchModel> mostRecentModelsForEachUser = new List<MWGMatchModel>();
 
+            //finds the most recent models for each user in MWG
             foreach(int Id in MWGmembersIdlist)
             {
                 List<MWGMatchModel> AllLikesDislikesWithUserId = new List<MWGMatchModel>();
+                //finds all models for one user and adds to a list
                 AllLikesDislikesWithUserId = AllLikeDislikesOfMWGId.Where(item => item.UserId == Id).ToList();
+                //finds amount of objects in list
                 int lastIndex = AllLikesDislikesWithUserId.Count;
+                //adds the most latest model for the user (highest ID)
+                // lastIndex-1 to get index value
                 mostRecentModelsForEachUser.Add(AllLikesDislikesWithUserId[lastIndex-1]);
             }
 
              //List<GenreRankingModel> AllGenreRankingsWithUserIdLAST = new List<GenreRankingModel>();
             List<List<int>> LikesDislikesList = new List<List<int>>();
 
+            //loops through all the most recent models
             for(int i = 0; i<mostRecentModelsForEachUser.Count; i++)
             {
                 List<int> tempList = new List<int>();
+                //saves string index values as temp
                 string temp = mostRecentModelsForEachUser[i].LikesDislikesIndexValues;
+                //loops thru string temp likesdislikes
                 for(int j =0; j < temp.Length; j++){
+                    //adds the  numeric value of each character into temp list
                     tempList.Add((int)Char.GetNumericValue(temp[j]));
                 }
-                    
+                //removes all instances of -1 (all commas in string temp were returned as -1)
                 LikesDislikesList.Add(tempList.Where(item => item != -1).ToList());
 
 
             }
             // return LikesDislikesList;
+            //like this:
+            // [
+            //     [1,0,1,0],
+            //     [0,0,1,1],
+            //     [0,1,0,0]
+            // ]
             int totalNumberOfVotes = LikesDislikesList[0].Count;
             List<int> sumsList = new List<int>();
-            int HighestMovieScore = 0;
-            int final = 0;
-            int HighestMovieScoreTemp = 0;
-            for(int i =0; i< LikesDislikesList.Count; i++)
+
+            //goes thru the number of votes -1
+            for(int i =0; i<= LikesDislikesList[0].Count-1; i++)
             {
-                HighestMovieScoreTemp = 0;
-                for(int j=0; j<LikesDislikesList[i].Count;j++)
+                int HighestMovieScoreTemp = 0;
+                //goes thru the number of members in MWG
+                for(int j=0; j<LikesDislikesList.Count;j++)
                 {
-                    HighestMovieScoreTemp += LikesDislikesList[i][j];
-                    
-                    sumsList.Add(HighestMovieScoreTemp);
-
-                    
-                    // if(HighestMovieScoreTemp > HighestMovieScore)
-                    // {
-                    //     final = j;
-                    //     HighestMovieScore = HighestMovieScoreTemp;
-                    // }
-
-                //     else
-                //     {
-                //         List<int> allHighest = new List<int>();
-                //         allHighest.Add(j);
-                //         var rand = new Random();
-                //         final = rand.Next(allHighest.Count+1);                    
-                //     }
+                    //updates highestScoreTemp with every vote
+                    HighestMovieScoreTemp += LikesDislikesList[j][i];           
                 }
-                
-                
+                    //adds the highest score to sumsList
+                    sumsList.Add(HighestMovieScoreTemp);
             }
-            return sumsList;
+
+            List<int> sumsIndex = new List<int>();
+            int maxValue = sumsList.Max();
+            //goes thru sumList
+            for(int k = 0; k < sumsList.Count; k++)
+            {
+                //check to see if number in list is maxValue
+                //if it is, add to sumsIndex list
+                if(sumsList[k] == maxValue)
+                {
+                    sumsIndex.Add(k);
+                }
+            }
+            
+            var rand = new Random();          
+            //finds random num from 0 to number of items in sumsIndex                        
+            int result = rand.Next(sumsIndex.Count);
+
+            
+            return sumsIndex[result];
+               
+
+            //sumsIndex = sumsList.Add(sumsList.Where(IndexOf(number) => number == 2)));
+
+            //return sumsIndex;
+            // return sumsIndex;
             //return final;
             // int MovieTotal1 = 0;
             // int MovieTotal2 = 0;

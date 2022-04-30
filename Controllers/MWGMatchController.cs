@@ -40,7 +40,7 @@ namespace pickflicks2.Controllers
         }
 
         [HttpGet("GetTopMovieByMWGId/{MWGId}")]
-        public List<int> GetTopMovieByMWGId(int MWGId)
+        public int GetTopMovieByMWGId(int MWGId)
         {
             return _data.GetTopMovieByMWGId(MWGId);
         }
