@@ -72,7 +72,7 @@ namespace pickflicks2.Services
             }
             return result;
         }
-        public bool UpdateSwipings(int MWGId)
+        public bool ResetMWGStatusbyMWGId(int MWGId)
         {
             bool result = false;
             List<MWGStatusModel> allMWGStatusByMWGId = GetMWGStatusByMWGId(MWGId).ToList();

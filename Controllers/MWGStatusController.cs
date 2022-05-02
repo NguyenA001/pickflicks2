@@ -24,6 +24,7 @@ namespace pickflicks2.Controllers
            return _data.AddMWGStatus(newMWGStatus);
         }
 
+        [HttpGet("GetAllMWGStatus")]
         public IEnumerable<MWGStatusModel> GetAllMWGStatus()
         {
             return _data.GetAllMWGStatus();
@@ -57,9 +58,9 @@ namespace pickflicks2.Controllers
             return _data.UpdateSwipings(MWGId, UserId);
         }
         [HttpPost("ResetMWGStatusbyMWGId/{MWGId}")]
-        public bool UpdateSwipings(int MWGId)
+        public bool ResetMWGStatusbyMWGId(int MWGId)
         {
-            return _data.UpdateSwipings(MWGId);
+            return _data.ResetMWGStatusbyMWGId(MWGId);
         }
     }
 }
