@@ -10,6 +10,7 @@ builder.Services.AddScoped<MWGService>();
 builder.Services.AddScoped<GenreRankingService>();
 builder.Services.AddScoped<MovieService>();
 builder.Services.AddScoped<MWGMatchService>();
+builder.Services.AddScoped<MWGStatusService>();
 
 var connectionString = builder.Configuration.GetConnectionString("MyConnectionString");
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));

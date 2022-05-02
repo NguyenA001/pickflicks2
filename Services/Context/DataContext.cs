@@ -14,6 +14,7 @@ namespace pickflicks2.Services.Context
         public DbSet<GenreRankingModel> GenreRankingInfo {get; set;}
         public DbSet<MoviesModel> MoviesInfo {get; set;}
         public DbSet<MWGMatchModel> MWGMatchInfo {get; set;}
+        public DbSet<MWGStatusModel> MWGStatusInfo {get; set;}
         public DataContext(DbContextOptions options ): base(options)
         { }
         
@@ -138,7 +139,36 @@ namespace pickflicks2.Services.Context
             };
            builder.Entity<MWGModel>().HasData(MWGData);
 
-        var  GenreRankingData = new List<GenreRankingModel>()
+        var  MWGStatusData = new List<MWGStatusModel>()
+            {
+                new MWGStatusModel() {
+                    Id = 1,
+                    MWGId = 1,
+                    UserId = 1,
+                    MembersId = "1,2,3",
+                    UserDoneWithGenreRankings = false,
+                    UserDoneWithSwipes = false,
+                },
+                new MWGStatusModel() {
+                    Id = 2,
+                    MWGId = 1,
+                    UserId = 2,
+                    MembersId = "1,2,3",
+                    UserDoneWithGenreRankings = false,
+                    UserDoneWithSwipes = false,
+                },
+                new MWGStatusModel() {
+                    Id = 3,
+                    MWGId = 1,
+                    UserId = 3,
+                    MembersId = "1,2,3",
+                    UserDoneWithGenreRankings = false,
+                    UserDoneWithSwipes = false,
+                },
+            };
+           builder.Entity<MWGStatusModel>().HasData(MWGStatusData);
+
+            var  GenreRankingData = new List<GenreRankingModel>()
             {
                 new GenreRankingModel() {
                     Id = 1,
