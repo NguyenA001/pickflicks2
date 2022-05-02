@@ -20,7 +20,7 @@ namespace pickflicks2.Services
         {
             bool result = false;
             bool doesMWGStatusExist = _context.MWGStatusInfo.SingleOrDefault(item => item.Id == newMWGStatus.Id) != null;
-            if (!doesMWGExist)
+            if (!doesMWGStatusExist)
             {
                 _context.Add(newMWGStatus);
                 result = _context.SaveChanges() != 0;
@@ -35,15 +35,15 @@ namespace pickflicks2.Services
 
         public MWGStatusModel GetMWGStatusById(int id)
         {
-            return _context.MWGStatusInfo.Where(item => item.Id == id);
+            return _context.MWGStatusInfo.SingleOrDefault(item => item.Id == id);
         }
 
-        public MWGStatusModel GetMWGStatusByMWGId(int MWGId)
+        public IEnumerable<MWGStatusModel> GetMWGStatusByMWGId(int MWGId)
         {
             return _context.MWGStatusInfo.Where(item => item.MWGId == MWGId);
         }
 
-        public MWGStatusModel GetMWGStatusByUserId(int UserId)
+        public IEnumerable<MWGStatusModel> GetMWGStatusByUserId(int UserId)
         {
             return _context.MWGStatusInfo.Where(item => item.UserId == UserId);
         }
@@ -51,26 +51,24 @@ namespace pickflicks2.Services
         public bool UpdateGenreRanking(int MWGId, int UserId)
         {
             bool result = false;
-            List <MWGStatusModel> allMWGStatusByMWGId = GetMWGStatusByMWGId(MWGId).ToList();
-            MWGStatusModel allMWGStatusOfUser =  allMWGStatusByMWGId.Where(item => item.UserId == UserId);
-            if (!allMWGStatusOfUser)
+            var foundMWGStatus = GetAllMWGStatus().SingleOrDefault(item => item.UserId == UserId && item.MWGId == MWGId);
+            if(foundMWGStatus != null)
             {
-                allMWGStatusOfUser.UserDoneWithGenreRankings = !allMWGStatusOfUser.UserDoneWithGenreRankings;
-                _context.Update<MWGStatusModel>(allMWGStatusOfUser);
-                result = _context.SaveChanges() != 0;
+            foundMWGStatus.UserDoneWithGenreRankings = !foundMWGStatus.UserDoneWithGenreRankings;
+            _context.Update<MWGStatusModel>(foundMWGStatus);
+            result = _context.SaveChanges() != 0;
             }
             return result;
         }
         public bool UpdateSwipings(int MWGId, int UserId)
         {
             bool result = false;
-            List<MWGStatusModel> allMWGStatusByMWGId = GetMWGStatusByMWGId(MWGId).ToList();
-            MWGStatusModel MWGwithUserId = allMWGStatusByMWGId.Where(item => item.UserId == UserId);
-            if (!MWGwithUserId)
+            var foundMWGStatus = GetAllMWGStatus().SingleOrDefault(item => item.UserId == UserId && item.MWGId == MWGId);
+            if(foundMWGStatus != null)
             {
-                MWGwithUserId.UserDoneWithSwipes = !MWGwithUserId.UserDoneWithSwipes;
-                _context.Update<MWGStatusModel>(MWGwithUserId);
-                result = _context.SaveChanges() != 0;
+            foundMWGStatus.UserDoneWithSwipes = !foundMWGStatus.UserDoneWithSwipes;
+            _context.Update<MWGStatusModel>(foundMWGStatus);
+            result = _context.SaveChanges() != 0;
             }
             return result;
         }
@@ -81,7 +79,7 @@ namespace pickflicks2.Services
             foreach(MWGStatusModel eachUser in allMWGStatusByMWGId)
             {
                 eachUser.UserDoneWithSwipes = false;
-                each.UserDoneWithGenreRankings = false;
+                eachUser.UserDoneWithGenreRankings = false;
                 _context.Update<MWGStatusModel>(eachUser);
             }
             result = _context.SaveChanges() != 0;

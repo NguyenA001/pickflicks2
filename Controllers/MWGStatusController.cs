@@ -30,20 +30,20 @@ namespace pickflicks2.Controllers
         }
 
         [HttpGet("GetMWGStatusById/{id}")]
-        public MWGModel GetMWGStatusById(int id)
+        public MWGStatusModel GetMWGStatusById(int id)
         {
             return _data.GetMWGStatusById(id);
         }
         [HttpGet("GetMWGStatusByMWGId/{MWGId}")]
-        public MWGModel GetMWGById(int MWGId)
+        public IEnumerable<MWGStatusModel> GetMWGStatusByMWGId(int MWGId)
         {
-            return _data.GetMWGById(MWGId);
+            return _data.GetMWGStatusByMWGId(MWGId);
         }
 
         [HttpGet("GetMWGStatusByUserId/{UserId}")]
-        public MWGModel GetMWGStatusById(int UserId)
+        public IEnumerable<MWGStatusModel> GetMWGStatusByUserId(int UserId)
         {
-            return _data.GetMWGStatusById(UserId);
+            return _data.GetMWGStatusByUserId(UserId);
         }
 
         [HttpPost("UpdateGenreRanking/{MWGId}/{UserId}")]
