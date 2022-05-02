@@ -205,6 +205,7 @@ namespace pickflicks2.Services.Context
                 },
             };
             builder.Entity<GenreRankingModel>().HasData(GenreRankingData);
+
             var MoviesData = new List<MoviesModel>()
             {
                 new MoviesModel(){
@@ -345,7 +346,6 @@ namespace pickflicks2.Services.Context
 
             };
             builder.Entity<MoviesModel>().HasData(MoviesData);
-           builder.Entity<GenreRankingModel>().HasData(GenreRankingData);
 
 
             var  MWGMatchData = new List<MWGMatchModel>()
