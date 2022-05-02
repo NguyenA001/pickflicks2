@@ -205,6 +205,30 @@ namespace pickflicks2.Services.Context
                 },
             };
            builder.Entity<GenreRankingModel>().HasData(GenreRankingData);
+
+
+            var  MWGMatchData = new List<MWGMatchModel>()
+            {
+                new MWGMatchModel() {
+                    Id = 1,
+                    MWGId = 1,
+                    UserId = 1,
+                    LikesDislikesIndexValues = "1,0,1,0,0,0,1,0,0,1,0,0,1,1,1",
+                },
+                new MWGMatchModel() {
+                    Id = 2,
+                    MWGId = 1,
+                    UserId = 2,
+                    LikesDislikesIndexValues = "1,0,1,0,1,1,1,0,0,1,0,1,1,1,1",
+                },
+                new MWGMatchModel() {
+                    Id = 3,
+                    MWGId = 1,
+                    UserId = 3,
+                    LikesDislikesIndexValues = "0,0,1,0,1,0,0,0,0,1,0,0,1,0,1",
+                },
+            };
+           builder.Entity<MWGMatchModel>().HasData(MWGMatchData);
         }
     }
 }
