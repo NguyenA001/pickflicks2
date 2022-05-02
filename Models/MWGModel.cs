@@ -13,6 +13,13 @@ namespace pickflicks2.Models
         public string? ChosenGenres {get; set;} //String of chosen genres before watching movie
         public string? StreamingService {get; set; } 
         public bool IsDeleted { get; set; } // Soft delete
+
+        //tie to member and check if their status
+        // make another table that has MWGID, membersID and check if they did it
+        //track  for genres
+        //another track for swipes
+
+
     }
 }
 

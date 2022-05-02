@@ -143,6 +143,15 @@ namespace pickflicks2.Services
         public async Task<bool> AddAll15Movies(int MWGId, int genreId, int streamingServiceId)
         {
             bool result = false;
+            List<MoviesModel> AllOldMoviesByMWGId = new List<MoviesModel>();
+            AllOldMoviesByMWGId = _context.MoviesInfo.Where(item => item.MWGId == MWGId).ToList();
+            foreach(MoviesModel oldMovie in AllOldMoviesByMWGId)
+            {
+                _context.Remove<MoviesModel>(oldMovie);
+            }
+            //AllOldMoviesByMWGId.RemoveAll(item => item.MWGId == MWGId);
+            
+
             var randomMovies= await UseRandomPageNumberToGetRandomListOfMovieIds(genreId, streamingServiceId);
 
             foreach (string movie in randomMovies)
@@ -156,6 +165,7 @@ namespace pickflicks2.Services
                     {
                         using (HttpContent content = res.Content)
                         {
+
                             string data = await content.ReadAsStringAsync();
                             if (data != null)
                             {
