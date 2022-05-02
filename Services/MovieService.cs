@@ -174,7 +174,6 @@ namespace pickflicks2.Services
                                 MoviesModel newMM = new MoviesModel();
                                 newMM.Id = 0;
                                 newMM.MWGId = MWGId;
-                                newMM.SessionId = 0;
                                 newMM.MovieName = dataObj["title"].ToString();
                                 newMM.MovieOverview = dataObj["plot_overview"].ToString();
                                 newMM.MovieReleaseYear = (int)dataObj["year"];
