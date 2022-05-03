@@ -18,10 +18,10 @@ namespace pickflicks2.Controllers
             _data = dataFromService;
         }
 
-        [HttpPost("AddMWGStatus")]
-        public bool AddMWGStatus(MWGStatusModel newMWGStatus)
+        [HttpPost("AddMWGStatus/{MWGId}")]
+        public bool AddMWGStatus(int MWGId)
         {
-           return _data.AddMWGStatus(newMWGStatus);
+           return _data.AddMWGStatus(MWGId);
         }
 
         [HttpGet("GetAllMWGStatus")]

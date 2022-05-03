@@ -16,15 +16,34 @@ namespace pickflicks2.Services
             _context = context;
         }
 
-        public bool AddMWGStatus(MWGStatusModel newMWGStatus)
+        public bool AddMWGStatus(int MWGId)
         {
             bool result = false;
-            bool doesMWGStatusExist = _context.MWGStatusInfo.SingleOrDefault(item => item.Id == newMWGStatus.Id) != null;
-            if (!doesMWGStatusExist)
+            MWGModel foundMWG =  _context.MWGInfo.SingleOrDefault(item => item.Id == MWGId);
+            string foundMWGmembersId = foundMWG.MembersId;
+
+            List<int> MWGmembersIdlist = new List<int>();
+            foreach (string memberId in foundMWGmembersId.Split(','))
+            MWGmembersIdlist.Add(Int32.Parse(memberId));
+
+            foreach(int userId in MWGmembersIdlist)
             {
-                _context.Add(newMWGStatus);
+                MWGStatusModel newMWGStatusModel = new MWGStatusModel();
+                newMWGStatusModel.Id = 0;
+                newMWGStatusModel.MWGId = MWGId;
+                newMWGStatusModel.MembersId = foundMWGmembersId;
+                newMWGStatusModel.UserId = userId;
+                newMWGStatusModel.UserDoneWithGenreRankings = false;
+                newMWGStatusModel.UserDoneWithSwipes = false;
+                
+                 _context.Add(newMWGStatusModel);
                 result = _context.SaveChanges() != 0;
+                
             }
+            return result;
+
+
+
             return result;
         }
 
