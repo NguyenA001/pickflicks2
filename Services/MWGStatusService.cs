@@ -22,7 +22,7 @@ namespace pickflicks2.Services
             MWGModel foundMWG =  _context.MWGInfo.SingleOrDefault(item => item.Id == MWGId);
             string foundMWGmembersId = foundMWG.MembersId;
             string foundMWGmembersNames = foundMWG.MembersNames;
-            string foundMWGCreatorId = foundMWG.GroupCreatorId;
+            int foundMWGCreatorId = foundMWG.GroupCreatorId;
 
             List<int> MWGmembersIdlist = new List<int>();
             foreach (string memberId in foundMWGmembersId.Split(','))
@@ -114,7 +114,7 @@ namespace pickflicks2.Services
         public bool UpdateMWGStatus(int MWGId)
         {
             bool result = false;
-            MWGModel foundMWG = _context.MWGInfo.SingleOrDefault(item => item.MWGId == MWGId);
+            MWGModel foundMWG = _context.MWGInfo.SingleOrDefault(item => item.Id == MWGId);
             List <MWGStatusModel> allMWGStatusOfMWGID = GetMWGStatusByMWGId(MWGId).ToList();
             foreach(MWGStatusModel statusModel in allMWGStatusOfMWGID)
             {

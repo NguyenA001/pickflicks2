@@ -88,11 +88,14 @@ namespace pickflicks2.Services
         {
             bool result = false;
             MWGModel foundMWG = GetMWGById(MWGId);
+            UserModel foundUser = _context.UserInfo.SingleOrDefault(item => item.Id == newMemberId);
+
             if (foundMWG != null)
             {
                 // Append the new userId into the string
                 foundMWG.MembersId += ',' + newMemberId.ToString();
                 foundMWG.MembersNames += ',' + newMemberName;
+                foundMWG.MembersIcons += ',' + foundUser.Icon;
                 _context.Update<MWGModel>(foundMWG);
                 result = _context.SaveChanges() != 0;
             }
@@ -118,23 +121,29 @@ namespace pickflicks2.Services
         {
             bool result = false;
             MWGModel foundMWG = GetMWGById(MWGId);
+            UserModel foundUser = _context.UserInfo.SingleOrDefault(item => item.Id == deletedMemberId);
+
             if (foundMWG != null)
             {
                 int position = foundMWG.MembersId.IndexOf(deletedMemberId.ToString());
                 int namePosition = foundMWG.MembersNames.IndexOf(deleteMemberName);
+                int iconPosition = foundMWG.MembersIcons.IndexOf(foundUser.Icon);
 
                 int lengthOfDeletedMemberId = deletedMemberId.ToString().Length;
                 int lengthOfDeletedMemberName = deleteMemberName.Length;
+                int lengthOfDeletedMemberIcon = foundUser.Icon.Length;
 
                 if (position == foundMWG.MembersId.Length - lengthOfDeletedMemberId)
                 {
                     foundMWG.MembersId = foundMWG.MembersId.Remove(position - 1, lengthOfDeletedMemberId+1);
                     foundMWG.MembersNames = foundMWG.MembersNames.Remove(namePosition - 1, lengthOfDeletedMemberName+1);
+                    foundMWG.MembersIcons = foundMWG.MembersIcons.Remove(iconPosition -1, lengthOfDeletedMemberIcon+1);
                 }
                 else
                 {
                     foundMWG.MembersId = foundMWG.MembersId.Remove(position, lengthOfDeletedMemberId+1);
                     foundMWG.MembersNames = foundMWG.MembersNames.Remove(namePosition, lengthOfDeletedMemberName+1);
+                    foundMWG.MembersIcons = foundMWG.MembersIcons.Remove(iconPosition, lengthOfDeletedMemberIcon+1);
                 }
                 _context.Update<MWGModel>(foundMWG);
                 result = _context.SaveChanges() != 0;
