@@ -21,6 +21,8 @@ namespace pickflicks2.Services
             bool result = false;
             MWGModel foundMWG =  _context.MWGInfo.SingleOrDefault(item => item.Id == MWGId);
             string foundMWGmembersId = foundMWG.MembersId;
+            string foundMWGmembersNames = foundMWG.MembersNames;
+            string foundMWGCreatorId = foundMWG.GroupCreatorId;
 
             List<int> MWGmembersIdlist = new List<int>();
             foreach (string memberId in foundMWGmembersId.Split(','))
@@ -33,8 +35,12 @@ namespace pickflicks2.Services
                 newMWGStatusModel.MWGId = MWGId;
                 newMWGStatusModel.MembersId = foundMWGmembersId;
                 newMWGStatusModel.UserId = userId;
+                newMWGStatusModel.MembersNames = foundMWGmembersNames;
+                newMWGStatusModel.GroupCreatorId = foundMWGCreatorId;
                 newMWGStatusModel.UserDoneWithGenreRankings = false;
                 newMWGStatusModel.UserDoneWithSwipes = false;
+                newMWGStatusModel.IsDeleted = false;
+                newMWGStatusModel.IsStarted = false;
                 
                  _context.Add(newMWGStatusModel);
                 result = _context.SaveChanges() != 0;
@@ -100,6 +106,24 @@ namespace pickflicks2.Services
                 eachUser.UserDoneWithSwipes = false;
                 eachUser.UserDoneWithGenreRankings = false;
                 _context.Update<MWGStatusModel>(eachUser);
+            }
+            result = _context.SaveChanges() != 0;
+            return result;
+        }
+
+        public bool UpdateMWGStatus(int MWGId)
+        {
+            bool result = false;
+            MWGModel foundMWG = _context.MWGInfo.SingleOrDefault(item => item.MWGId == MWGId);
+            List <MWGStatusModel> allMWGStatusOfMWGID = GetMWGStatusByMWGId(MWGId).ToList();
+            foreach(MWGStatusModel statusModel in allMWGStatusOfMWGID)
+            {
+                statusModel.MembersId = foundMWG.MembersId;
+                statusModel.MembersNames = foundMWG.MembersNames;
+                statusModel.MWGName = foundMWG.MWGName;
+                statusModel.IsDeleted = foundMWG.IsDeleted;
+
+                _context.Update<MWGStatusModel>(statusModel);
             }
             result = _context.SaveChanges() != 0;
             return result;

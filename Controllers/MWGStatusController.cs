@@ -57,10 +57,17 @@ namespace pickflicks2.Controllers
         {
             return _data.UpdateSwipings(MWGId, UserId);
         }
+
         [HttpPost("ResetMWGStatusbyMWGId/{MWGId}")]
         public bool ResetMWGStatusbyMWGId(int MWGId)
         {
             return _data.ResetMWGStatusbyMWGId(MWGId);
+        }
+
+        [HttpPost("UpdateMWGStatus/{MWGId}")]
+        public bool UpdateMWGStatus(int MWGId)
+        {
+            return _data.UpdateMWGStatus(MWGId);
         }
     }
 }

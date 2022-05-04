@@ -20,7 +20,7 @@ namespace pickflicks2.Services
         public bool AddMWG(MWGModel newMWGModel)
         {
             bool result = false;
-            bool doesMWGExist = _context.MWGInfo.SingleOrDefault(MWG => MWG.Id == newMWGModel.Id) != null;
+            bool doesMWGExist = _context.MWGInfo.SingleOrDefault(MWG => MWG.MWGName == newMWGModel.MWGName) != null;
             if (!doesMWGExist)
             {
                 _context.Add(newMWGModel);
