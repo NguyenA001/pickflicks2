@@ -151,7 +151,8 @@ namespace pickflicks2.Services.Context
                     MembersId = "1,2,3",
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsStarted = false
                 },
                 new MWGStatusModel() {
                     Id = 2,
@@ -163,7 +164,8 @@ namespace pickflicks2.Services.Context
                     MembersId = "1,2,3",
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsStarted = false
                 },
                 new MWGStatusModel() {
                     Id = 3,
@@ -175,7 +177,8 @@ namespace pickflicks2.Services.Context
                     MembersId = "1,2,3",
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsStarted = false
                 },
                 new MWGStatusModel() {
                     Id = 4,
@@ -187,7 +190,8 @@ namespace pickflicks2.Services.Context
                     MembersId = "1,2,4",
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsStarted = false
                 },
                 new MWGStatusModel() {
                     Id = 5,
@@ -199,7 +203,8 @@ namespace pickflicks2.Services.Context
                     MembersId = "1,2,4",
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsStarted = false
                 },
                 new MWGStatusModel() {
                     Id = 6,
@@ -211,7 +216,8 @@ namespace pickflicks2.Services.Context
                     MembersId = "1,2,4",
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsStarted = false
                 },
                 new MWGStatusModel() {
                     Id = 7,
@@ -223,7 +229,8 @@ namespace pickflicks2.Services.Context
                     MembersId = "1,2,3,5",
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsStarted = false
                 },
                 new MWGStatusModel() {
                     Id = 8,
@@ -235,7 +242,8 @@ namespace pickflicks2.Services.Context
                     MembersId = "1,2,3,5",
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsStarted = false
                 },
                 new MWGStatusModel() {
                     Id = 9,
@@ -247,7 +255,9 @@ namespace pickflicks2.Services.Context
                     MembersId = "1,2,3,5",
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsStarted = false
+                    
                 },
                 new MWGStatusModel() {
                     Id = 10,
@@ -259,7 +269,8 @@ namespace pickflicks2.Services.Context
                     MembersId = "1,2,3,5",
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsStarted = false
                 },
             };
             builder.Entity<MWGStatusModel>().HasData(MWGStatusData);
