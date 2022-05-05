@@ -21,5 +21,7 @@ namespace pickflicks2.Models
         public bool AreAllMembersDoneWithSwipes { get; set; }
         public bool IsDeleted { get; set; }
 
+        public MWGStatusModel(){}
+
     }
 }

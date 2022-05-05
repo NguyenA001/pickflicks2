@@ -33,6 +33,7 @@ namespace pickflicks2.Services
                 MWGStatusModel newMWGStatusModel = new MWGStatusModel();
                 newMWGStatusModel.Id = 0;
                 newMWGStatusModel.MWGId = MWGId;
+                newMWGStatusModel.MWGName = foundMWG.MWGName;
                 newMWGStatusModel.MembersId = foundMWGmembersId;
                 newMWGStatusModel.UserId = userId;
                 newMWGStatusModel.MembersNames = foundMWGmembersNames;
@@ -134,6 +135,7 @@ namespace pickflicks2.Services
             List <MWGStatusModel> allMWGStatusOfMWGID = GetMWGStatusByMWGId(MWGId).ToList();
             foreach(MWGStatusModel statusModel in allMWGStatusOfMWGID)
             {
+                statusModel.MWGName = foundMWG.MWGName;
                 statusModel.MembersId = foundMWG.MembersId;
                 statusModel.MembersNames = foundMWG.MembersNames;
                 statusModel.MWGName = foundMWG.MWGName;

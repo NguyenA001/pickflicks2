@@ -17,6 +17,69 @@ namespace pickflicks2.Services
             _context = context;
         }
 
+        public bool AllUsersDoneGenre(int MWGId)
+        {
+             List<MWGStatusModel> allMWGStatusModelOfMWG =  _context.MWGStatusInfo.Where(item => item.MWGId == MWGId).ToList();
+
+             //loop thru list and check to see if all user.donewithgenre is true
+
+            List<MWGStatusModel> allCompleted = allMWGStatusModelOfMWG.Where(user => user.UserDoneWithGenreRankings == false).ToList();
+
+            //if anyone in MWG is not done, will return false
+            if(allCompleted.Count > 0)
+            {
+                return false;
+            }else{
+                return true;
+            }
+        }
+
+        public bool AllUsersDoneSwipes(int MWGId)
+        {
+            List<MWGStatusModel> allMWGStatusModelOfMWG =  _context.MWGStatusInfo.Where(item => item.MWGId == MWGId).ToList();
+
+            List<MWGStatusModel> allCompleted = allMWGStatusModelOfMWG.Where(user => user.UserDoneWithSwipes == false).ToList();
+
+            //if anyone in MWG is not done, will return false
+            if(allCompleted.Count > 0)
+            {
+                return false;
+            }else{
+                return true;
+            }
+        }
+        public IEnumerable<MWGStatusModel> GetMWGStatusByMWGId(int MWGId)
+        {
+            bool areAllDoneGenre = AllUsersDoneGenre(MWGId);
+            bool areAllDoneSwipe = AllUsersDoneSwipes(MWGId);
+
+            List<MWGStatusModel> allMWGStatusModels = _context.MWGStatusInfo.Where(item => item.MWGId == MWGId).ToList();
+            foreach(MWGStatusModel mwg in allMWGStatusModels)
+            {
+                mwg.AreAllMembersDoneWithGenre = areAllDoneGenre;
+                mwg.AreAllMembersDoneWithSwipes = areAllDoneSwipe;
+            }
+            return allMWGStatusModels;
+        }
+        public bool UpdateMWGStatus(int MWGId)
+        {
+            bool result = false;
+            MWGModel foundMWG = _context.MWGInfo.SingleOrDefault(item => item.Id == MWGId);
+            List <MWGStatusModel> allMWGStatusOfMWGID = GetMWGStatusByMWGId(MWGId).ToList();
+            foreach(MWGStatusModel statusModel in allMWGStatusOfMWGID)
+            {
+                statusModel.MWGName = foundMWG.MWGName;
+                statusModel.MembersId = foundMWG.MembersId;
+                statusModel.MembersNames = foundMWG.MembersNames;
+                statusModel.MWGName = foundMWG.MWGName;
+                statusModel.IsDeleted = foundMWG.IsDeleted;
+
+                _context.Update<MWGStatusModel>(statusModel);
+            }
+            result = _context.SaveChanges() != 0;
+            return result;
+        }
+
         public bool AddMWG(MWGModel newMWGModel)
         {
             bool result = false;
@@ -72,15 +135,18 @@ namespace pickflicks2.Services
 
         public bool EditMWGName(string? oldMWGName, string? updatedMWGName)
         {
-            bool result = false;
+            //bool result = false;
             MWGModel foundMWG = GetMWGByMWGName(oldMWGName);
             if (foundMWG != null)
             {
                 foundMWG.MWGName = updatedMWGName;
                 _context.Update<MWGModel>(foundMWG);
-                result = _context.SaveChanges() != 0;
+                //result = _context.SaveChanges() != 0;
             }
-            return result;
+
+            bool didItWork = UpdateMWGStatus(foundMWG.Id);
+
+            return didItWork;
         }
 
         // Hopefully this works
