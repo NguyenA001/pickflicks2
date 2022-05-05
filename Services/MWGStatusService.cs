@@ -65,6 +65,7 @@ namespace pickflicks2.Services
 
         public IEnumerable<MWGStatusModel> GetMWGStatusByMWGId(int MWGId)
         {
+            
             bool areAllDoneGenre = AllUsersDoneGenre(MWGId);
             bool areAllDoneSwipe = AllUsersDoneSwipes(MWGId);
 
@@ -79,7 +80,15 @@ namespace pickflicks2.Services
 
         public IEnumerable<MWGStatusModel> GetMWGStatusByUserId(int UserId)
         {
-            return _context.MWGStatusInfo.Where(item => item.UserId == UserId);
+            List <MWGStatusModel> allMWGStatus = new List<MWGStatusModel>();
+            List<MWGStatusModel> allOnesOfuser =  _context.MWGStatusInfo.Where(item => item.UserId == UserId).ToList();
+            foreach (MWGStatusModel justOne in allOnesOfuser)
+            {
+                List <MWGStatusModel> thoseOnes = GetMWGStatusByMWGId(justOne.MWGId).ToList();
+                MWGStatusModel thisOne = thoseOnes.SingleOrDefault(item => item.UserId == UserId);
+                allMWGStatus.Add(thisOne);
+            }
+            return allMWGStatus;
         }
 
         public bool UpdateGenreRanking(int MWGId, int UserId)
