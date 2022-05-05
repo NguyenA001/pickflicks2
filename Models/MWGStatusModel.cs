@@ -16,7 +16,9 @@ namespace pickflicks2.Models
         public int UserId { get; set; }
         public bool IsStarted { get; set; }
         public bool UserDoneWithGenreRankings { get; set; }
+        public bool AreAllMembersDoneWithGenre { get; set; }
         public bool UserDoneWithSwipes { get; set; }
+        public bool AreAllMembersDoneWithSwipes { get; set; }
         public bool IsDeleted { get; set; }
 
     }

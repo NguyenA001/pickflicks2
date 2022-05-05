@@ -65,7 +65,16 @@ namespace pickflicks2.Services
 
         public IEnumerable<MWGStatusModel> GetMWGStatusByMWGId(int MWGId)
         {
-            return _context.MWGStatusInfo.Where(item => item.MWGId == MWGId);
+            bool areAllDoneGenre = AllUsersDoneGenre(MWGId);
+            bool areAllDoneSwipe = AllUsersDoneSwipes(MWGId);
+
+            List<MWGStatusModel> allMWGStatusModels = _context.MWGStatusInfo.Where(item => item.MWGId == MWGId).ToList();
+            foreach(MWGStatusModel mwg in allMWGStatusModels)
+            {
+                mwg.AreAllMembersDoneWithGenre = areAllDoneGenre;
+                mwg.AreAllMembersDoneWithSwipes = areAllDoneSwipe;
+            }
+            return allMWGStatusModels;
         }
 
         public IEnumerable<MWGStatusModel> GetMWGStatusByUserId(int UserId)
