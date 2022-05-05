@@ -81,5 +81,11 @@ namespace pickflicks2.Controllers
         {
             return _data.AllUsersDoneSwipes(MWGId);
         }
+
+        [HttpPost("UpdateIsStartedByMWGId/{MWGId}")]
+        public bool UpdateIsStartedByMWGId(int MWGId)
+        {
+            return _data.UpdateIsStartedByMWGId(MWGId);
+        }
     }
 }

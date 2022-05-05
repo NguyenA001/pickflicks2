@@ -47,10 +47,6 @@ namespace pickflicks2.Services
                 
             }
             return result;
-
-
-
-            return result;
         }
 
         public IEnumerable<MWGStatusModel> GetAllMWGStatus()
@@ -65,7 +61,6 @@ namespace pickflicks2.Services
 
         public IEnumerable<MWGStatusModel> GetMWGStatusByMWGId(int MWGId)
         {
-            
             bool areAllDoneGenre = AllUsersDoneGenre(MWGId);
             bool areAllDoneSwipe = AllUsersDoneSwipes(MWGId);
 
@@ -180,6 +175,19 @@ namespace pickflicks2.Services
             }else{
                 return true;
             }
+        }
+
+        public bool UpdateIsStartedByMWGId(int MWGId)
+        {
+            bool result = false;
+            List<MWGStatusModel> allMWGStatusByMWGId = GetMWGStatusByMWGId(MWGId).ToList();
+            foreach(MWGStatusModel model in allMWGStatusByMWGId)
+            {
+                model.IsStarted = !model.IsStarted;
+                _context.Update<MWGStatusModel>(model);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
         }
     }
 }
