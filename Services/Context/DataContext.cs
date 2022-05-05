@@ -152,7 +152,9 @@ namespace pickflicks2.Services.Context
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
                     IsDeleted = false,
-                    IsStarted = false
+                    IsStarted = false,
+                    AreAllMembersDoneWithGenre = false,
+                    AreAllMembersDoneWithSwipes = false
                 },
                 new MWGStatusModel() {
                     Id = 2,
@@ -165,7 +167,9 @@ namespace pickflicks2.Services.Context
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
                     IsDeleted = false,
-                    IsStarted = false
+                    IsStarted = false,
+                    AreAllMembersDoneWithGenre = false,
+                    AreAllMembersDoneWithSwipes = false,
                 },
                 new MWGStatusModel() {
                     Id = 3,
@@ -178,7 +182,9 @@ namespace pickflicks2.Services.Context
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
                     IsDeleted = false,
-                    IsStarted = false
+                    IsStarted = false,
+                                        AreAllMembersDoneWithGenre = false,
+                    AreAllMembersDoneWithSwipes = false
                 },
                 new MWGStatusModel() {
                     Id = 4,
@@ -191,7 +197,9 @@ namespace pickflicks2.Services.Context
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
                     IsDeleted = false,
-                    IsStarted = false
+                    IsStarted = false,
+                                        AreAllMembersDoneWithGenre = false,
+                    AreAllMembersDoneWithSwipes = false
                 },
                 new MWGStatusModel() {
                     Id = 5,
@@ -204,7 +212,9 @@ namespace pickflicks2.Services.Context
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
                     IsDeleted = false,
-                    IsStarted = false
+                    IsStarted = false,
+                                        AreAllMembersDoneWithGenre = false,
+                    AreAllMembersDoneWithSwipes = false
                 },
                 new MWGStatusModel() {
                     Id = 6,
@@ -217,7 +227,9 @@ namespace pickflicks2.Services.Context
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
                     IsDeleted = false,
-                    IsStarted = false
+                    IsStarted = false,
+                                        AreAllMembersDoneWithGenre = false,
+                    AreAllMembersDoneWithSwipes = false
                 },
                 new MWGStatusModel() {
                     Id = 7,
@@ -230,7 +242,9 @@ namespace pickflicks2.Services.Context
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
                     IsDeleted = false,
-                    IsStarted = false
+                    IsStarted = false,
+                                        AreAllMembersDoneWithGenre = false,
+                    AreAllMembersDoneWithSwipes = false
                 },
                 new MWGStatusModel() {
                     Id = 8,
@@ -243,7 +257,9 @@ namespace pickflicks2.Services.Context
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
                     IsDeleted = false,
-                    IsStarted = false
+                    IsStarted = false,
+                                        AreAllMembersDoneWithGenre = false,
+                    AreAllMembersDoneWithSwipes = false
                 },
                 new MWGStatusModel() {
                     Id = 9,
@@ -256,8 +272,10 @@ namespace pickflicks2.Services.Context
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
                     IsDeleted = false,
-                    IsStarted = false
-                    
+                    IsStarted = false,
+                                        AreAllMembersDoneWithGenre = false,
+                    AreAllMembersDoneWithSwipes = false
+
                 },
                 new MWGStatusModel() {
                     Id = 10,
@@ -270,7 +288,9 @@ namespace pickflicks2.Services.Context
                     UserDoneWithGenreRankings = false,
                     UserDoneWithSwipes = false,
                     IsDeleted = false,
-                    IsStarted = false
+                    IsStarted = false,
+                                        AreAllMembersDoneWithGenre = false,
+                    AreAllMembersDoneWithSwipes = false
                 },
             };
             builder.Entity<MWGStatusModel>().HasData(MWGStatusData);
@@ -455,7 +475,7 @@ namespace pickflicks2.Services.Context
             builder.Entity<MoviesModel>().HasData(MoviesData);
 
 
-            var  MWGMatchData = new List<MWGMatchModel>()
+            var MWGMatchData = new List<MWGMatchModel>()
             {
                 new MWGMatchModel() {
                     Id = 1,
@@ -476,7 +496,7 @@ namespace pickflicks2.Services.Context
                     LikesDislikesIndexValues = "0,0,1,0,1,0,0,0,0,1,0,0,1,0,1",
                 },
             };
-           builder.Entity<MWGMatchModel>().HasData(MWGMatchData);
+            builder.Entity<MWGMatchModel>().HasData(MWGMatchData);
         }
     }
 }

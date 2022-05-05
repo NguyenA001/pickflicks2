@@ -114,6 +114,9 @@ namespace pickflicks2.Services
             {
                 eachUser.UserDoneWithSwipes = false;
                 eachUser.UserDoneWithGenreRankings = false;
+                eachUser.IsStarted = false;
+                eachUser.AreAllMembersDoneWithGenre = false;
+                eachUser.AreAllMembersDoneWithSwipes = false;
                 _context.Update<MWGStatusModel>(eachUser);
             }
             result = _context.SaveChanges() != 0;
