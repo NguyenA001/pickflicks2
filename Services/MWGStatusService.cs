@@ -128,5 +128,37 @@ namespace pickflicks2.Services
             result = _context.SaveChanges() != 0;
             return result;
         }
+
+        public bool AllUsersDoneGenre(int MWGId)
+        {
+             List<MWGStatusModel> allMWGStatusModelOfMWG =  _context.MWGStatusInfo.Where(item => item.MWGId == MWGId).ToList();
+
+             //loop thru list and check to see if all user.donewithgenre is true
+
+            List<MWGStatusModel> allCompleted = allMWGStatusModelOfMWG.Where(user => user.UserDoneWithGenreRankings == false).ToList();
+
+            //if anyone in MWG is not done, will return false
+            if(allCompleted.Count > 0)
+            {
+                return false;
+            }else{
+                return true;
+            }
+        }
+
+        public bool AllUsersDoneSwipes(int MWGId)
+        {
+            List<MWGStatusModel> allMWGStatusModelOfMWG =  _context.MWGStatusInfo.Where(item => item.MWGId == MWGId).ToList();
+
+            List<MWGStatusModel> allCompleted = allMWGStatusModelOfMWG.Where(user => user.UserDoneWithSwipes == false).ToList();
+
+            //if anyone in MWG is not done, will return false
+            if(allCompleted.Count > 0)
+            {
+                return false;
+            }else{
+                return true;
+            }
+        }
     }
 }

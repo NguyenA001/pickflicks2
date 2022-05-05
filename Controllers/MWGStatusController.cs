@@ -69,5 +69,17 @@ namespace pickflicks2.Controllers
         {
             return _data.UpdateMWGStatus(MWGId);
         }
+
+        [HttpGet("AllUsersDoneGenre/{MWGId}")]
+        public bool AllUsersDoneGenre(int MWGId)
+        {
+            return _data.AllUsersDoneGenre(MWGId);
+        }
+
+        [HttpGet("AllUsersDoneSwipes/{MWGId}")]
+        public bool AllUsersDoneSwipes(int MWGId)
+        {
+            return _data.AllUsersDoneSwipes(MWGId);
+        }
     }
 }
