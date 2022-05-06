@@ -68,9 +68,9 @@ namespace pickflicks2.Services
             List <MWGStatusModel> allMWGStatusOfMWGID = GetMWGStatusByMWGId(MWGId).ToList();
             foreach(MWGStatusModel statusModel in allMWGStatusOfMWGID)
             {
-                statusModel.MWGName = foundMWG.MWGName;
                 statusModel.MembersId = foundMWG.MembersId;
                 statusModel.MembersNames = foundMWG.MembersNames;
+                statusModel.MembersId = foundMWG.MembersId;
                 statusModel.MWGName = foundMWG.MWGName;
                 statusModel.IsDeleted = foundMWG.IsDeleted;
 
@@ -164,8 +164,17 @@ namespace pickflicks2.Services
                 foundMWG.MembersIcons += ',' + foundUser.Icon;
                 _context.Update<MWGModel>(foundMWG);
                 result = _context.SaveChanges() != 0;
+                if(result)
+                {
+                    //add new member to MWGstatus models too
+                    bool didItWork = UpdateMWGStatus(MWGId);
+                    return didItWork;
+                }
             }
             return result;
+
+            
+            
         }
 
         public bool AddUserSuggestedMovies(int MWGId, string? newMovie)
@@ -213,8 +222,14 @@ namespace pickflicks2.Services
                 }
                 _context.Update<MWGModel>(foundMWG);
                 result = _context.SaveChanges() != 0;
+                if(result)
+                {
+                    bool didItWork = UpdateMWGStatus(MWGId);
+                    return didItWork;
+                }
             }
             return result;
+
         }
 
         public bool DeleteByMWGName(string? MWGName)
@@ -226,6 +241,11 @@ namespace pickflicks2.Services
                 foundMWG.IsDeleted = !foundMWG.IsDeleted;
                 _context.Update<MWGModel>(foundMWG);
                 result = _context.SaveChanges() != 0;
+                if(result)
+                {
+                    bool didItWork = UpdateMWGStatus(foundMWG.Id);
+                return didItWork;
+                }
             }
             return result;
         }
@@ -239,6 +259,11 @@ namespace pickflicks2.Services
                 foundMWG.IsDeleted = !foundMWG.IsDeleted;
                 _context.Update<MWGModel>(foundMWG);
                 result = _context.SaveChanges() != 0;
+                if(result)
+                {
+                    bool didItWork = UpdateMWGStatus(foundMWG.Id);
+                    return didItWork;
+                }
             }
             return result;
         }
