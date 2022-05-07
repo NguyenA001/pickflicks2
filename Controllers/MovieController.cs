@@ -46,12 +46,10 @@ namespace pickflicks2.Controllers
         } 
 
 
-        [HttpGet("AddAll15Movies/{MWGId}/{genreId}/{streamingServiceId}")]
+        [HttpPost("AddAll15Movies/{MWGId}/{genreId}/{streamingServiceId}")]
         public async Task<bool> AddAll15Movies(int MWGId, int genreId, int streamingServiceId)
         {
             return await _data.AddAll15Movies(MWGId, genreId, streamingServiceId);
         } 
-
-
     }
 }

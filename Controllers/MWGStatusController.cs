@@ -87,5 +87,11 @@ namespace pickflicks2.Controllers
         {
             return _data.UpdateIsStartedByMWGId(MWGId);
         }
+
+        [HttpPost("DeleteMWGStatus/{MWGId}/{userId}")]
+        public bool DeleteMWGStatus(int MWGId, int userId)
+        {
+            return _data.DeleteMWGStatus(MWGId, userId);
+        }
     }
 }

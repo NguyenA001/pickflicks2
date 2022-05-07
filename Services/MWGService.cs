@@ -17,6 +17,15 @@ namespace pickflicks2.Services
             _context = context;
         }
 
+        public bool DeleteMWGStatus(int MWGId, int userId)
+        {
+            bool result = false;
+            MWGStatusModel foundUser =  _context.MWGStatusInfo.SingleOrDefault(item => item.MWGId == MWGId && item.UserId == userId);
+            _context.Remove<MWGStatusModel>(foundUser);
+            result = _context.SaveChanges() != 0;
+            return result;
+        }
+
         public bool AllUsersDoneGenre(int MWGId)
         {
              List<MWGStatusModel> allMWGStatusModelOfMWG =  _context.MWGStatusInfo.Where(item => item.MWGId == MWGId).ToList();
@@ -225,7 +234,8 @@ namespace pickflicks2.Services
                 if(result)
                 {
                     bool didItWork = UpdateMWGStatus(MWGId);
-                    return didItWork;
+                    bool didItDelete = DeleteMWGStatus(MWGId, deletedMemberId);
+                    return didItDelete;
                 }
             }
             return result;

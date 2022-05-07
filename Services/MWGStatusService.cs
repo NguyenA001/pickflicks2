@@ -191,5 +191,14 @@ namespace pickflicks2.Services
             }
             return result;
         }
+
+        public bool DeleteMWGStatus(int MWGId, int userId)
+        {
+            bool result = false;
+            MWGStatusModel foundUser =  _context.MWGStatusInfo.SingleOrDefault(item => item.MWGId == MWGId && item.UserId == userId);
+            _context.Remove<MWGStatusModel>(foundUser);
+            result = _context.SaveChanges() != 0;
+            return result;
+        }
     }
 }
