@@ -11,6 +11,7 @@ builder.Services.AddScoped<GenreRankingService>();
 builder.Services.AddScoped<MovieService>();
 builder.Services.AddScoped<MWGMatchService>();
 builder.Services.AddScoped<MWGStatusService>();
+builder.Services.AddScoped<InvitationService>();
 
 var connectionString = builder.Configuration.GetConnectionString("MyConnectionString");
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
