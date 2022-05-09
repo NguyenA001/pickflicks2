@@ -62,7 +62,7 @@ namespace pickflicks2.Controllers
         } 
 
         [HttpPost("AcceptInvitation/{MWGId}/{UserId}")]
-        public IEnumerable<InvitationModel> AcceptInvitation(int MWGId, int UserId)
+        public bool AcceptInvitation(int MWGId, int UserId)
         {
             return _data.AcceptInvitation(MWGId, UserId);
         } 

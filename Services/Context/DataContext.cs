@@ -15,6 +15,7 @@ namespace pickflicks2.Services.Context
         public DbSet<MoviesModel> MoviesInfo { get; set; }
         public DbSet<MWGMatchModel> MWGMatchInfo { get; set; }
         public DbSet<MWGStatusModel> MWGStatusInfo { get; set; }
+        
         public DbSet<InvitationModel> InvitationInfo { get; set; }
         public DataContext(DbContextOptions options) : base(options)
         { }
