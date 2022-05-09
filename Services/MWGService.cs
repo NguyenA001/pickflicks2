@@ -328,5 +328,32 @@ namespace pickflicks2.Services
             }
             return result;
         }
+
+         public bool AddFinalGenre(int MWGId, string GenreName)
+        {
+            bool result = false;
+            MWGModel foundMWG = GetMWGById(MWGId);
+            if (foundMWG != null)
+            {
+                // Append the new userId into the string
+                foundMWG.FinalGenre = GenreName;
+                _context.Update<MWGModel>(foundMWG);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
+         public bool AddFinalMovieIndex(int MWGId, int index)
+        {
+            bool result = false;
+            MWGModel foundMWG = GetMWGById(MWGId);
+            if (foundMWG != null)
+            {
+                // Append the new userId into the string
+                foundMWG.FinalMovieIndex = index;
+                _context.Update<MWGModel>(foundMWG);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
     }
 }

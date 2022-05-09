@@ -11,6 +11,8 @@ namespace pickflicks2.Models
         public string? UserSuggestedMovies { get; set; } // String or objects of userSuggested movies members for sure want included
         public string? ChosenGenres {get; set;} //String of chosen genres before watching movie
         public string? StreamingService {get; set; } 
+        public string? FinalGenre { get; set; }
+        public int FinalMovieIndex { get; set; }
         public bool IsDeleted { get; set; } // Soft delete
 
         //tie to member and check if their status

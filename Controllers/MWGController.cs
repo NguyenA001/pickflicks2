@@ -123,5 +123,15 @@ namespace pickflicks2.Controllers
         {
             return _data.AddStreamingService(MWGId, serviceId);
         }
+        [HttpPost("AddFinalGenre/{MWGId}/{GenreName}")]
+        public bool AddFinalGenre(int MWGId, string GenreName)
+        {
+            return _data.AddFinalGenre(MWGId, GenreName);
+        }
+        [HttpPost("AddFinalMovieIndex/{MWGId}/{index}")]
+        public bool AddFinalMovieIndex(int MWGId, int index)
+        {
+            return _data.AddFinalMovieIndex(MWGId, index);
+        }
     }
 }

@@ -124,6 +124,8 @@ namespace pickflicks2.Services
             //finds random num from 0 to number of items in sumsIndex                        
             int result = rand.Next(sumsIndex.Count);
 
+            foundMWG.FinalMovieIndex = sumsIndex[result];
+            _context.SaveChanges();
             
             return sumsIndex[result];
         }
