@@ -60,7 +60,7 @@ namespace pickflicks2.Controllers
             return _data.GetAllMWGAUserIsMemberOf(userId);
         }
 
-        // Edit a MWG name (will return a bool)
+        // Edit a MWG name (will return a bool), edits MWGStatus models too
         [HttpPost("EditMWGName/{oldMWGName}/{updatedMWGName}")]
         public bool EditMWGName(string? oldMWGName, string? updatedMWGName)
         {
@@ -68,7 +68,7 @@ namespace pickflicks2.Controllers
         }
 
 
-        // Add a members to MWG only the GrouoCreator can do this (will return a bool)
+        // Add a members to MWG only the GrouoCreator can do this (will return a bool), will upate MWGStatus models too
         [HttpPost("AddMemberToMWG/{MWGId}/{newMemberId}/{newMemberName}")]
         public bool AddMemberToMWG(int MWGId, int newMemberId, string? newMemberName)
         {
@@ -82,20 +82,21 @@ namespace pickflicks2.Controllers
             return _data.AddUserSuggestedMovies(MWGId, newMovie);
         }
 
+        //updates MWGStatus models and permanently deletes old members MWGstatus model
         [HttpPost("DeleteMemberFromMWG/{MWGId}/{deletedMemberId}/{deleteMemberName}")]
         public bool DeleteMemberFromMWG(int MWGId, int deletedMemberId, string? deleteMemberName)
         {
             return _data.DeleteMemberFromMWG(MWGId, deletedMemberId, deleteMemberName);
         }
 
-        // Delete a MWG by MWGName (will return a bool)
+        // Delete a MWG by MWGName, changes isDeleted on MWGStatus models to true too
         [HttpPost("DeleteByMWGName/{MWGName}")]
         public bool DeleteByMWGName(string? MWGName)
         {
             return _data.DeleteByMWGName(MWGName);
         }
 
-        // Delete a MWG by id of MWG (will return a bool)
+        // Delete a MWG by id of MWG, changes isDeleted on MWGStatus models to true too
         [HttpPost("DeleteByMWGId/{MWGId}")]
         public bool DeleteByMWGId(int MWGId)
         {
@@ -108,12 +109,15 @@ namespace pickflicks2.Controllers
             return _data.EditMWG(MWG);
         }
 
+        //add the three genres the admin chooses initially for everyone else to vote on
+        //used to display the genre names on the genreRankingScreen on front end
         [HttpPost("AddChosenGenres/{MWGId}/{chosenGenres}")]
         public bool AddChosenGenres(int MWGId, string chosenGenres)
         {
             return _data.AddChosenGenres(MWGId, chosenGenres);
         }
 
+        //adds service id
         [HttpPost("AddStreamingService/{MWGId}/{serviceId}")]
         public bool AddStreamingService(int MWGId, string serviceId)
         {

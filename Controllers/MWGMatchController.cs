@@ -39,6 +39,8 @@ namespace pickflicks2.Controllers
             return _data.GetAllMWGMatchModels();
         }
 
+
+        //will get the index of the highest liked movie (or randomly one of them if there are multiples)
         [HttpGet("GetTopMovieByMWGId/{MWGId}")]
         public int GetTopMovieByMWGId(int MWGId)
         {

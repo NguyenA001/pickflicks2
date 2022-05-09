@@ -176,8 +176,23 @@ namespace pickflicks2.Services
                 if(result)
                 {
                     //add new member to MWGstatus models too
-                    bool didItWork = UpdateMWGStatus(MWGId);
-                    return didItWork;
+                    UpdateMWGStatus(MWGId);
+                    MWGStatusModel newMWGStatusModel = new MWGStatusModel();
+                    newMWGStatusModel.Id = 0;
+                    newMWGStatusModel.MWGId = MWGId;
+                    newMWGStatusModel.MWGName = foundMWG.MWGName;
+                    newMWGStatusModel.MembersId = foundMWG.MembersId;
+                    newMWGStatusModel.UserId = newMemberId;
+                    newMWGStatusModel.MembersNames = foundMWG.MembersNames;
+                    newMWGStatusModel.GroupCreatorId = foundMWG.GroupCreatorId;
+                    newMWGStatusModel.UserDoneWithGenreRankings = false;
+                    newMWGStatusModel.UserDoneWithSwipes = false;
+                    newMWGStatusModel.IsDeleted = false;
+                    newMWGStatusModel.IsStarted = false;
+                    
+                    _context.Add(newMWGStatusModel);
+                    result = _context.SaveChanges() != 0;
+                    return result;
                 }
             }
             return result;
