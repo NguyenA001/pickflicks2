@@ -335,7 +335,6 @@ namespace pickflicks2.Services
             MWGModel foundMWG = GetMWGById(MWGId);
             if (foundMWG != null)
             {
-                // Append the new userId into the string
                 foundMWG.FinalGenre = GenreName;
                 _context.Update<MWGModel>(foundMWG);
                 result = _context.SaveChanges() != 0;

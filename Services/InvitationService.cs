@@ -9,6 +9,11 @@ namespace pickflicks2.Services
 {
     public class InvitationService
     {
+        private readonly DataContext _context;
+        public InvitationService(DataContext context)
+        {
+            _context = context;
+        }
         public bool AddInvitations(InvitationModel newInvitation)
         {
             bool result = false;
@@ -51,10 +56,10 @@ namespace pickflicks2.Services
             return _context.InvitationInfo.Where(item => item.UserId == UserId && item.HasAccepted == true);
         } 
 
-        public IEnumerable<InvitationModel> AcceptInvitation(int MWGId, int UserId)
+        public bool AcceptInvitation(int MWGId, int UserId)
         {
             bool result = false;
-            var foundInvitation = GetAllUnacceptedInvitationsByUserId().SingleOrDefault(item => item.UserId == UserId && item.MWGId == MWGId);
+            var foundInvitation = GetAllUnacceptedInvitationsByUserId(UserId).SingleOrDefault(item => item.UserId == UserId && item.MWGId == MWGId);
             if(foundInvitation != null)
             {
                 foundInvitation.HasAccepted = true;
