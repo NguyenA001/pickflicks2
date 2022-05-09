@@ -44,9 +44,9 @@ namespace pickflicks2.Controllers
         } 
 
         [HttpGet("GetAllInvitationsByUserId/{UserId}")]
-        public IEnumerable<InvitationModel> GetInvitationsByUserId(int UserId)
+        public IEnumerable<InvitationModel> GetAllInvitationsByUserId(int UserId)
         {
-            return _data.GetInvitationsByUserId(UserId);
+            return _data.GetAllInvitationsByUserId(UserId);
         } 
 
         [HttpGet("GetAllUnacceptedInvitationsByUserId/{UserId}")]
