@@ -10,7 +10,7 @@ namespace pickflicks2.Models
         public int Id { get; set; }
         public int MWGId { get; set; }
         public int UserId { get; set; }
-        public string LikesDislikesIndexValues { get; set; }
+        public string? LikesDislikesIndexValues { get; set; }
 
     
     }

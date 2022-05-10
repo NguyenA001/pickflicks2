@@ -196,9 +196,6 @@ namespace pickflicks2.Services
                 }
             }
             return result;
-
-            
-            
         }
 
         public bool AddUserSuggestedMovies(int MWGId, string? newMovie)
