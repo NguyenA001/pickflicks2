@@ -67,6 +67,7 @@ namespace pickflicks2.Services
             return result;
         }
 
+
         public bool VerifyUserPassword(string? password, string? storedHash, string? storedSalt)
         {
             var SaltBytes = Convert.FromBase64String(storedSalt);
@@ -166,6 +167,12 @@ namespace pickflicks2.Services
         {
             return _context.UserInfo.SingleOrDefault(item => item.Username == username);
         }
+        
+        // Only use this for backend, NEVER PASS DATA TO FRONTEND 
+        public UserModel FindUserById(int Id)
+        {
+            return _context.UserInfo.SingleOrDefault(item => item.Id == Id);
+        }
 
         // Add a favorite to a MWG 
         public bool AddFavoriteMWG(int userId, int MWGId)
@@ -222,6 +229,71 @@ namespace pickflicks2.Services
                 result = _context.SaveChanges() != 0;
             }
             return result;
+        }
+
+        public bool EditUsername(int userId, string newUsername)
+        {
+            bool result = false;
+            UserModel foundUser = _context.UserInfo.SingleOrDefault(user => user.Id == userId);
+
+            //trying to get all MWGStatusModels that has the userId within the string of MembersId?
+            List<MWGStatusModel> MWGStatusThatContainsThisUser = _context.MWGStatusInfo.Where(user => user.MembersId.Contains(userId.ToString())).ToList();
+            List<MWGModel> MWGModelsThatContainsThisUser = _context.MWGInfo.Where(user => user.MembersId.Contains(userId.ToString())).ToList();
+            List<InvitationModel> InvitationModelsThatContainsThisUser = _context.MWGInfo.Where(user => user.UserId == userId).ToList();
+
+            if(foundUser != null)
+            {
+                foundUser.Username = newUsername;
+
+                if(MWGStatusThatContainsThisUser != null)
+                {
+                    foreach(MWGStatusModel item in MWGStatusThatContainsThisUser)
+                    {
+                        //attempt to replace the name of the current with the new one in the string of members names
+                        item.MembersNames.Replace(foundUser.Username, newUsername);
+                    }
+                }
+                if(MWGModelsThatContainsThisUser != null)
+                {
+                    foreach(MWGModel item in MWGModelsThatContainsThisUser)
+                    {
+                        //attempt to replace the name of the current with the new one in the string of members names
+                        item.MembersNames.Replace(foundUser.Username, newUsername);
+                    }
+                }
+                if(InvitationModelsThatContainsThisUser != null)
+                {
+                    foreach(InvitationModel item in InvitationModelsThatContainsThisUser)
+                    {
+                        //attempt to replace the name of the current with the new one in the string of members names
+                        item.UserId == newUsername;
+                    }
+                }
+
+                _context.Update<UserModel>(foundUser);
+                _context.Update<MWGModel>(MWGModelsThatContainsThisUser);
+                _context.Update<InvitationModel>(InvitationModelsThatContainsThisUser);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
+    
+        public bool EditPassword(int UserId, string? newPassword)
+        {
+            bool result = false;
+            UserModel foundUser = FindUserById(UserId);
+            if(foundUser != null)
+            {
+            var hashedPassword = HashPassword(newPassword);
+            foundUser.Salt = hashedPassword.Salt;
+            foundUser.Hash = hashedPassword.Hash;
+
+            _context.Update<UserModel>(foundUser);
+            result = _context.SaveChanges()!=0;
+            }
+
+            return result;
+
         }
     }
 }

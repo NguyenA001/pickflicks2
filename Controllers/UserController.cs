@@ -81,5 +81,16 @@ namespace pickflicks2.Controllers
         {
             return _data.EditUserIcon(userId, iconName);
         }
+
+        [HttpPost("EditUsername{userId}/{newUsername}")]
+        public bool EditUsername(int userId, string newUsername)
+        {
+            return _data.EditUsername(userId, newUsername);
+        }
+        [HttpPost("EditPassword{userId}/{newPassword}")]
+        public bool EditPassword(int userId, string newPassword)
+        {
+            return _data.EditPassword(userId, newPassword);
+        }
     }
 }
