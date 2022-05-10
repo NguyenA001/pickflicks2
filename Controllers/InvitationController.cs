@@ -18,10 +18,10 @@ namespace pickflicks2.Controllers
             _data = dataFromService;
         }
 
-        [HttpPost("AddInvitations")]
-        public bool AddInvitations(InvitationModel newInvitation)
+        [HttpPost("AddInvitations/{MWGId}/{MWGName}/{stringOfInvitedUserNames}")]
+        public bool AddInvitations(int MWGId, string? MWGName, string? stringOfInvitedUserNames)
         {
-            return _data.AddInvitations(newInvitation);
+            return _data.AddInvitations(MWGId, MWGName, stringOfInvitedUserNames);
         }
 
         [HttpGet("GetAllInvitationsByMWGId/{MWGId}")]
@@ -61,10 +61,16 @@ namespace pickflicks2.Controllers
             return _data.GetAllAcceptedInvitationsByUserId(UserId);
         } 
 
+
         [HttpPost("AcceptInvitation/{MWGId}/{UserId}")]
         public bool AcceptInvitation(int MWGId, int UserId)
         {
             return _data.AcceptInvitation(MWGId, UserId);
         } 
+
+        //groupCreator creates new MWG
+            //MWGmodel is created with user as groupCreator, and their username, icon, and id already in model
+        //groupCreator sends invite to users
+            //every time the user searches a name in the front end, it adds the the users name, id, and icon in a list
     }
 }

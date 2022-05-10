@@ -239,7 +239,7 @@ namespace pickflicks2.Services
             //trying to get all MWGStatusModels that has the userId within the string of MembersId?
             List<MWGStatusModel> MWGStatusThatContainsThisUser = _context.MWGStatusInfo.Where(user => user.MembersId.Contains(userId.ToString())).ToList();
             List<MWGModel> MWGModelsThatContainsThisUser = _context.MWGInfo.Where(user => user.MembersId.Contains(userId.ToString())).ToList();
-            List<InvitationModel> InvitationModelsThatContainsThisUser = _context.MWGInfo.Where(user => user.UserId == userId).ToList();
+            List<InvitationModel> InvitationModelsThatContainsThisUser = _context.InvitationInfo.Where(user => user.UserId == userId).ToList();
 
             if(foundUser != null)
             {
@@ -251,6 +251,8 @@ namespace pickflicks2.Services
                     {
                         //attempt to replace the name of the current with the new one in the string of members names
                         item.MembersNames.Replace(foundUser.Username, newUsername);
+                        _context.Update<MWGStatusModel>(item);
+                        result = _context.SaveChanges() != 0;
                     }
                 }
                 if(MWGModelsThatContainsThisUser != null)
@@ -259,6 +261,8 @@ namespace pickflicks2.Services
                     {
                         //attempt to replace the name of the current with the new one in the string of members names
                         item.MembersNames.Replace(foundUser.Username, newUsername);
+                        _context.Update<MWGModel>(item);
+                        result = _context.SaveChanges() != 0;
                     }
                 }
                 if(InvitationModelsThatContainsThisUser != null)
@@ -266,13 +270,13 @@ namespace pickflicks2.Services
                     foreach(InvitationModel item in InvitationModelsThatContainsThisUser)
                     {
                         //attempt to replace the name of the current with the new one in the string of members names
-                        item.UserId == newUsername;
+                        item.UserName = newUsername;
+                        _context.Update<InvitationModel>(item);
+                        result = _context.SaveChanges() != 0;
                     }
                 }
 
                 _context.Update<UserModel>(foundUser);
-                _context.Update<MWGModel>(MWGModelsThatContainsThisUser);
-                _context.Update<InvitationModel>(InvitationModelsThatContainsThisUser);
                 result = _context.SaveChanges() != 0;
             }
             return result;

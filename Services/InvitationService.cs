@@ -143,16 +143,49 @@ namespace pickflicks2.Services
         }
 
         // -------InvitationService
-        public bool AddInvitations(InvitationModel newInvitation)
+        public bool AddInvitations( int MWGId, string? MWGName, string? stringOfInvitedUserNames)
         {
+            // bool result = false;
+            // InvitationModel doesInvitationExist = _context.InvitationInfo.SingleOrDefault(invite => invite.MWGId == newInvitation.MWGId && invite.UserId == newInvitation.UserId);
+            // if (doesInvitationExist == null)
+            // {
+            //     _context.Add(newInvitation);
+            //     result = _context.SaveChanges() != 0;
+            // }
+            // return result; 
             bool result = false;
-            InvitationModel doesInvitationExist = _context.InvitationInfo.SingleOrDefault(invite => invite.MWGId == newInvitation.MWGId && invite.UserId == newInvitation.UserId);
-            if (doesInvitationExist == null)
+            List<string> invitedUsers = new List<string>();
+            //turn string of invited users into a list
+            foreach(string user in stringOfInvitedUserNames.Split(","))
             {
-                _context.Add(newInvitation);
-                result = _context.SaveChanges() != 0;
+                invitedUsers.Add(user);
             }
-            return result; 
+            //go thru list of string users and creates a new invitation model for each user
+            foreach(string listUser in invitedUsers)
+            {
+                //checks to see if an invitation already exists for the user for this MWG
+                InvitationModel doesInvitationExist = _context.InvitationInfo.SingleOrDefault(invite => invite.MWGId == MWGId && invite.UserName == listUser);
+                //if no invitation exists..
+                if (doesInvitationExist == null)
+                {
+                    //find the userModel matching the userName
+                    UserModel foundUser = _context.UserInfo.SingleOrDefault(item => item.Username == listUser);
+                    //create new instance of invitation model
+                    InvitationModel newInvitationModel = new InvitationModel();
+                    //fill in all required fields in model
+                    newInvitationModel.Id = 0;
+                    newInvitationModel.MWGId = MWGId;
+                    newInvitationModel.MWGName = MWGName;
+                    newInvitationModel.UserId = foundUser.Id;
+                    newInvitationModel.UserName = listUser;
+                    newInvitationModel.UserIcon = foundUser.Icon;
+                    newInvitationModel.HasAccepted = false;
+                    //add and save changes
+                    _context.Add(newInvitationModel);
+                    result = _context.SaveChanges() != 0;
+                }
+            }
+            return result;
         }
 
         public IEnumerable<InvitationModel> GetAllInvitationsByMWGId(int MWGId)
