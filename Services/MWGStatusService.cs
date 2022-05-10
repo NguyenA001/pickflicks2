@@ -77,7 +77,7 @@ namespace pickflicks2.Services
         public IEnumerable<MWGStatusModel> GetMWGStatusByUserId(int UserId)
         {
             List <MWGStatusModel> allMWGStatus = new List<MWGStatusModel>();
-            List<MWGStatusModel> allOnesOfuser =  _context.MWGStatusInfo.Where(item => item.UserId == UserId).ToList();
+            List <MWGStatusModel> allOnesOfuser =  _context.MWGStatusInfo.Where(item => item.UserId == UserId).ToList();
             foreach (MWGStatusModel justOne in allOnesOfuser)
             {
                 List <MWGStatusModel> thoseOnes = GetMWGStatusByMWGId(justOne.MWGId).ToList();

@@ -92,7 +92,7 @@ namespace pickflicks2.Services
                         issuer: "http://localhost:5000",
                         audience: "http://localhost:5000",
                         claims: new List<Claim>(),
-                        expires: DateTime.Now.AddSeconds(30),
+                        expires: DateTime.Now.AddMinutes(30),
                         signingCredentials: signinCredentials
                     );
                     
@@ -220,11 +220,34 @@ namespace pickflicks2.Services
         {
             bool result = false;
 
+            List<MWGModel> MWGModelsThatContainsThisUser = _context.MWGStatusInfo.Where(user => user.MembersId.Contains(userId.ToString())).ToList();
+            List<InvitationModel> InvitationModelsThatContainsThisUser = _context.MWGInfo.Where(user => user.UserId == userId).ToList();
+
+
             var foundUser = _context.UserInfo.SingleOrDefault(user => user.Id == userId);
 
             if (foundUser != null) {
-                foundUser.Icon = iconName; 
 
+                if(MWGModelsThatContainsThisUser != null)
+                {
+                    foreach(MWGModel item in MWGModelsThatContainsThisUser)
+                    {
+                        item.MembersIcons.Replace(foundUser.Icon, iconName);
+                        _context.Update<MWGModel>(item);
+                    }
+                }
+
+                if(InvitationModelsThatContainsThisUser != null)
+                {
+                    foreach(InvitationModel item in InvitationModelsThatContainsThisUser)
+                    {
+                        item.UserIcon = iconName;
+                        _context.Update<InvitationModel>(item);
+
+                    }
+                }
+
+                foundUser.Icon = iconName; 
                 _context.Update<UserModel>(foundUser);
                 result = _context.SaveChanges() != 0;
             }
@@ -282,7 +305,7 @@ namespace pickflicks2.Services
             return result;
         }
     
-        public bool EditPassword(int UserId, string? newPassword)
+        public bool EditPassword(int userId, string? newPassword)
         {
             bool result = false;
             UserModel foundUser = FindUserById(UserId);
@@ -298,6 +321,22 @@ namespace pickflicks2.Services
 
             return result;
 
+        }
+        
+        //This just checks if the password is correct without generating a new token for to change password?
+        public IActionResult Login([FromBody] LoginDTO user)
+        {
+            IActionResult Result = Unauthorized();
+            if (DoesUserExists(user.Username))
+            {
+                var foundUser = FindUserByUsername(user.Username);
+                var verifyPass = VerifyUserPassword(user.Password, foundUser.Hash, foundUser.Salt);
+                if (verifyPass)
+                {
+                    Result = true;
+                }
+            }
+            return Result;
         }
     }
 }
