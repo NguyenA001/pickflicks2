@@ -234,6 +234,7 @@ namespace pickflicks2.Services
                     {
                         item.MembersIcons.Replace(foundUser.Icon, iconName);
                         _context.Update<MWGModel>(item);
+                        result = _context.SaveChanges() != 0;
                     }
                 }
 
@@ -243,7 +244,7 @@ namespace pickflicks2.Services
                     {
                         item.UserIcon = iconName;
                         _context.Update<InvitationModel>(item);
-
+                        result = _context.SaveChanges() != 0;
                     }
                 }
 
@@ -266,7 +267,6 @@ namespace pickflicks2.Services
 
             if(foundUser != null)
             {
-                foundUser.Username = newUsername;
 
                 if(MWGStatusThatContainsThisUser != null)
                 {
@@ -298,7 +298,8 @@ namespace pickflicks2.Services
                         result = _context.SaveChanges() != 0;
                     }
                 }
-
+                
+                foundUser.Username = newUsername;
                 _context.Update<UserModel>(foundUser);
                 result = _context.SaveChanges() != 0;
             }
