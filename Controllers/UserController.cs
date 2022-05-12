@@ -92,5 +92,10 @@ namespace pickflicks2.Controllers
         {
             return _data.EditPassword(userId, newPassword);
         }
+        [HttpPost("CheckPassword")]
+        public bool CheckPassword([FromBody] LoginDTO user)
+        {
+            return _data.CheckPassword(user);
+        }
     }
 }

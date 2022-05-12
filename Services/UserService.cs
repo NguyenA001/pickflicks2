@@ -220,8 +220,8 @@ namespace pickflicks2.Services
         {
             bool result = false;
 
-            List<MWGModel> MWGModelsThatContainsThisUser = _context.MWGStatusInfo.Where(user => user.MembersId.Contains(userId.ToString())).ToList();
-            List<InvitationModel> InvitationModelsThatContainsThisUser = _context.MWGInfo.Where(user => user.UserId == userId).ToList();
+            List<MWGModel> MWGModelsThatContainsThisUser = _context.MWGInfo.Where(user => user.MembersId.Contains(userId.ToString())).ToList();
+            List<InvitationModel> InvitationModelsThatContainsThisUser = _context.InvitationInfo.Where(user => user.UserId == userId).ToList();
 
 
             var foundUser = _context.UserInfo.SingleOrDefault(user => user.Id == userId);
@@ -232,7 +232,7 @@ namespace pickflicks2.Services
                 {
                     foreach(MWGModel item in MWGModelsThatContainsThisUser)
                     {
-                        item.MembersIcons.Replace(foundUser.Icon, iconName);
+                        item.MembersIcons = item.MembersIcons.Replace(foundUser.Icon, iconName);
                         _context.Update<MWGModel>(item);
                         result = _context.SaveChanges() != 0;
                     }
@@ -273,7 +273,7 @@ namespace pickflicks2.Services
                     foreach(MWGStatusModel item in MWGStatusThatContainsThisUser)
                     {
                         //attempt to replace the name of the current with the new one in the string of members names
-                        item.MembersNames.Replace(foundUser.Username, newUsername);
+                        item.MembersNames = item.MembersNames.Replace(foundUser.Username, newUsername);
                         _context.Update<MWGStatusModel>(item);
                         result = _context.SaveChanges() != 0;
                     }
@@ -283,7 +283,7 @@ namespace pickflicks2.Services
                     foreach(MWGModel item in MWGModelsThatContainsThisUser)
                     {
                         //attempt to replace the name of the current with the new one in the string of members names
-                        item.MembersNames.Replace(foundUser.Username, newUsername);
+                        item.MembersNames = item.MembersNames.Replace(foundUser.Username, newUsername);
                         _context.Update<MWGModel>(item);
                         result = _context.SaveChanges() != 0;
                     }
@@ -309,7 +309,7 @@ namespace pickflicks2.Services
         public bool EditPassword(int userId, string? newPassword)
         {
             bool result = false;
-            UserModel foundUser = FindUserById(UserId);
+            UserModel foundUser = FindUserById(userId);
             if(foundUser != null)
             {
             var hashedPassword = HashPassword(newPassword);
@@ -325,19 +325,19 @@ namespace pickflicks2.Services
         }
         
         //This just checks if the password is correct without generating a new token for to change password?
-        public IActionResult Login([FromBody] LoginDTO user)
+        public bool CheckPassword([FromBody] LoginDTO user)
         {
-            IActionResult Result = Unauthorized();
+            bool result = false;
             if (DoesUserExists(user.Username))
             {
                 var foundUser = FindUserByUsername(user.Username);
                 var verifyPass = VerifyUserPassword(user.Password, foundUser.Hash, foundUser.Salt);
                 if (verifyPass)
                 {
-                    Result = true;
+                    result = true;
                 }
             }
-            return Result;
+            return result;
         }
     }
 }
