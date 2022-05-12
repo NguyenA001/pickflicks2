@@ -68,6 +68,12 @@ namespace pickflicks2.Controllers
             return _data.AcceptInvitation(MWGId, UserId);
         } 
 
+        [HttpPost("DeleteInvitation/{MWGId}/{UserId}")]
+        public bool DeleteInvitation(int MWGId, int UserId)
+        {
+            return _data.DeleteInvitation(MWGId, UserId);
+        } 
+
         //groupCreator creates new MWG
             //MWGmodel is created with user as groupCreator, and their username, icon, and id already in model
         //groupCreator sends invite to users

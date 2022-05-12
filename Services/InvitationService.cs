@@ -233,5 +233,14 @@ namespace pickflicks2.Services
             result = AddMemberToMWG(MWGId, UserId, foundUser.Username);
             return result;
         } 
+
+        public bool DeleteInvitation(int MWGId, int UserId)
+        {
+            bool result = false;
+            InvitationModel foundUser = _context.InvitationInfo.SingleOrDefault(item => item.MWGId == MWGId && item.UserId == UserId);
+            _context.Remove<InvitationModel>(foundUser);
+            result = _context.SaveChanges() != 0;
+            return result;
+        } 
     }
 }

@@ -158,7 +158,8 @@ namespace pickflicks2.Services
             return didItWork;
         }
 
-        // Hopefully this works
+        // when you add a member, you should send them an invite first ant they need to accept it
+        
         public bool AddMemberToMWG(int MWGId, int newMemberId, string? newMemberName)
         {
             bool result = false;
@@ -245,8 +246,12 @@ namespace pickflicks2.Services
                 result = _context.SaveChanges() != 0;
                 if(result)
                 {
+                    //update MWG model to remove deleted member
                     bool didItWork = UpdateMWGStatus(MWGId);
+                    //delete MWGStatus model of deleted member
                     bool didItDelete = DeleteMWGStatus(MWGId, deletedMemberId);
+                    //delete the invitation model of the member (so they can be invited again)
+
                     return didItDelete;
                 }
             }
