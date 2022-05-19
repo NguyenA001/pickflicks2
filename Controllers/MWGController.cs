@@ -76,10 +76,20 @@ namespace pickflicks2.Controllers
         }
 
         // Add a user suggested movie to a MWG (will return a bool)
-        [HttpPost("AddUserSuggestedMovies/{MWGId}/{newMovie}")]
-        public bool AddUserSuggestedMovies(int MWGId, string? newMovie)
+        [HttpPost("suggestedMovieNames/{MWGId}/{newMovie}")]
+        public bool suggestedMovieNames(int MWGId, string? newMovie)
         {
-            return _data.AddUserSuggestedMovies(MWGId, newMovie);
+            return _data.suggestedMovieNames(MWGId, newMovie);
+        }
+        [HttpPost("emptysuggestedMovieNames/{MWGId}")]
+        public bool emptysuggestedMovieNames(int MWGId)
+        {
+            return _data.emptysuggestedMovieNames(MWGId);
+        }
+        [HttpPost("suggestedMovieGenres/{MWGId}/{newGenre}")]
+        public bool suggestedMovieGenres(int MWGId, string? newGenre)
+        {
+            return _data.suggestedMovieGenres(MWGId, newGenre);
         }
 
         //updates MWGStatus models and permanently deletes old members MWGstatus model

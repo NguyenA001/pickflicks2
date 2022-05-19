@@ -199,16 +199,90 @@ namespace pickflicks2.Services
             return result;
         }
 
-        public bool AddUserSuggestedMovies(int MWGId, string? newMovie)
+        public bool suggestedMovieNames(int MWGId, string? newMovie)
         {
             bool result = false;
             MWGModel foundMWG = GetMWGById(MWGId);
             if (foundMWG != null)
             {
                 // Append the new userId into the string
-                foundMWG.UserSuggestedMovies += ',' + newMovie;
+                List<string> stringList = foundMWG.suggestedMovieNames.Split(',').ToList();
+                // int length = stringList.Count;
+                if(foundMWG.suggestedMovieNames.Split(',').Length < 4)
+                {
+                    if(foundMWG.suggestedMovieNames == "")
+                    {
+                        foundMWG.suggestedMovieNames += newMovie;
+                        _context.Update<MWGModel>(foundMWG);
+                        result = _context.SaveChanges() != 0;
+                    }
+                    else
+                    {
+                        foundMWG.suggestedMovieNames += ',' + newMovie;
+                        _context.Update<MWGModel>(foundMWG);
+                        result = _context.SaveChanges() != 0;
+                    }
+                }
+                else
+                {
+                    stringList[3] = stringList[2];
+                    stringList[2] = stringList[1];
+                    stringList[1] = stringList[0];
+                    stringList[0] = newMovie;
+                    foundMWG.suggestedMovieNames = string.Join(',', stringList);
+                    _context.Update<MWGModel>(foundMWG);
+                    result = _context.SaveChanges() != 0;
+                }
+            }
+            return result;
+        }
+        public bool emptysuggestedMovieNames(int MWGId)
+        {
+            bool result = false;
+            MWGModel foundMWG = GetMWGById(MWGId);
+            if (foundMWG != null)
+            {
+                // Append the new userId into the string
+                foundMWG.suggestedMovieNames = "";
                 _context.Update<MWGModel>(foundMWG);
                 result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
+        public bool suggestedMovieGenres(int MWGId, string? newGenre)
+        {
+            bool result = false;
+            MWGModel foundMWG = GetMWGById(MWGId);
+            if (foundMWG != null)
+            {
+                // Append the new userId into the string
+                List<string> stringList = foundMWG.suggestedMovieGenres.Split(',').ToList();
+                // int length = stringList.Count;
+                if(foundMWG.suggestedMovieGenres.Split(',').Length < 4)
+                {
+                    if(foundMWG.suggestedMovieGenres == "")
+                    {
+                        foundMWG.suggestedMovieGenres += newGenre;
+                        _context.Update<MWGModel>(foundMWG);
+                        result = _context.SaveChanges() != 0;
+                    }
+                    else
+                    {
+                        foundMWG.suggestedMovieGenres += ',' + newGenre;
+                        _context.Update<MWGModel>(foundMWG);
+                        result = _context.SaveChanges() != 0;
+                    }
+                }
+                else
+                {
+                    stringList[3] = stringList[2];
+                    stringList[2] = stringList[1];
+                    stringList[1] = stringList[0];
+                    stringList[0] = newGenre;
+                    foundMWG.suggestedMovieGenres = string.Join(',', stringList);
+                    _context.Update<MWGModel>(foundMWG);
+                    result = _context.SaveChanges() != 0;
+                }
             }
             return result;
         }
