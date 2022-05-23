@@ -122,6 +122,7 @@ namespace pickflicks2.Services
                 eachUser.IsStarted = false;
                 eachUser.AreAllMembersDoneWithGenre = false;
                 eachUser.AreAllMembersDoneWithSwipes = false;
+                eachUser.HaveMoviesBeenFetched = false;
                 _context.Update<MWGStatusModel>(eachUser);
             }
             result = _context.SaveChanges() != 0;
@@ -186,6 +187,19 @@ namespace pickflicks2.Services
             foreach(MWGStatusModel model in allMWGStatusByMWGId)
             {
                 model.IsStarted = !model.IsStarted;
+                _context.Update<MWGStatusModel>(model);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
+
+        public bool UpdateHaveMoviesBeenFetched(int MWGId)
+        {
+            bool result = false;
+            List<MWGStatusModel> allMWGStatusByMWGId = GetMWGStatusByMWGId(MWGId).ToList();
+            foreach(MWGStatusModel model in allMWGStatusByMWGId)
+            {
+                model.HaveMoviesBeenFetched = !model.HaveMoviesBeenFetched;
                 _context.Update<MWGStatusModel>(model);
                 result = _context.SaveChanges() != 0;
             }

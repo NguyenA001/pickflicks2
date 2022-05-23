@@ -89,6 +89,12 @@ namespace pickflicks2.Controllers
             return _data.UpdateIsStartedByMWGId(MWGId);
         }
 
+        [HttpPost("UpdateHaveMoviesBeenFetched/{MWGId}")]
+        public bool UpdateHaveMoviesBeenFetched(int MWGId)
+        {
+            return _data.UpdateHaveMoviesBeenFetched(MWGId);
+        }
+
         //when a user is deleted from a MWG, this endpoint permanently deletes their MWGStatus models associated with that MWGId
         [HttpPost("DeleteMWGStatus/{MWGId}/{userId}")]
         public bool DeleteMWGStatus(int MWGId, int userId)

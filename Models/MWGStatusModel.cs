@@ -19,6 +19,7 @@ namespace pickflicks2.Models
         public bool AreAllMembersDoneWithGenre { get; set; }
         public bool UserDoneWithSwipes { get; set; }
         public bool AreAllMembersDoneWithSwipes { get; set; }
+        public bool HaveMoviesBeenFetched { get; set; }
         public bool IsDeleted { get; set; }
 
         public MWGStatusModel(){}

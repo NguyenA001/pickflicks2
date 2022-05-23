@@ -145,14 +145,6 @@ namespace pickflicks2.Services
         // -------InvitationService
         public bool AddInvitations( int MWGId, string? MWGName, string? stringOfInvitedUserNames)
         {
-            // bool result = false;
-            // InvitationModel doesInvitationExist = _context.InvitationInfo.SingleOrDefault(invite => invite.MWGId == newInvitation.MWGId && invite.UserId == newInvitation.UserId);
-            // if (doesInvitationExist == null)
-            // {
-            //     _context.Add(newInvitation);
-            //     result = _context.SaveChanges() != 0;
-            // }
-            // return result; 
             bool result = false;
             List<string> invitedUsers = new List<string>();
             //turn string of invited users into a list

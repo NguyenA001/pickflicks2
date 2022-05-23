@@ -87,8 +87,8 @@ namespace pickflicks2.Services
         //fetch using random page number
         public async Task<List<string>> UseRandomPageNumberToGetRandomListOfMovieIds(int genreId, int streamingServiceId)
         {
-            int pageNum = await TestPageNumber(genreId, streamingServiceId);
-            string baseUrl = $"https://api.watchmode.com/v1/list-titles/?apiKey=mETUm6GZ5uGvydlOLpOdvzHNucdbuaZ9LJDp9Flw&types=movie&genres={genreId}&page={pageNum}&source_ids={streamingServiceId}&regions=US";
+            //int pageNum = await TestPageNumber(genreId, streamingServiceId);
+            string baseUrl = $"https://api.watchmode.com/v1/list-titles/?apiKey=mETUm6GZ5uGvydlOLpOdvzHNucdbuaZ9LJDp9Flw&types=movie&genres={genreId}&source_ids={streamingServiceId}&regions=US";
             //Have your using statements within a try/catch blokc that will catch any exceptions.
             try
             {
