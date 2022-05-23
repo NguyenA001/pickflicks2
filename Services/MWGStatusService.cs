@@ -40,6 +40,7 @@ namespace pickflicks2.Services
                 newMWGStatusModel.GroupCreatorId = foundMWGCreatorId;
                 newMWGStatusModel.UserDoneWithGenreRankings = false;
                 newMWGStatusModel.UserDoneWithSwipes = false;
+                newMWGStatusModel.HaveMoviesBeenFetched = false;
                 newMWGStatusModel.IsDeleted = false;
                 newMWGStatusModel.IsStarted = false;
                 
