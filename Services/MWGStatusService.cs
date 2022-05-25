@@ -121,6 +121,7 @@ namespace pickflicks2.Services
                 eachUser.UserDoneWithSwipes = false;
                 eachUser.UserDoneWithGenreRankings = false;
                 eachUser.IsStarted = false;
+                
                 eachUser.AreAllMembersDoneWithGenre = false;
                 eachUser.AreAllMembersDoneWithSwipes = false;
                 eachUser.HaveMoviesBeenFetched = false;
