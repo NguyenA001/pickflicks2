@@ -208,7 +208,7 @@ namespace pickflicks2.Services
                 // Append the new userId into the string
                 List<string> stringList = foundMWG.suggestedMovieNames.Split(',').ToList();
                 // int length = stringList.Count;
-                if(foundMWG.suggestedMovieNames.Split(',').Length < 4)
+                if(foundMWG.suggestedMovieNames.Split(',').Length < 3)
                 {
                     if(foundMWG.suggestedMovieNames == "")
                     {
@@ -225,7 +225,6 @@ namespace pickflicks2.Services
                 }
                 else
                 {
-                    stringList[3] = stringList[2];
                     stringList[2] = stringList[1];
                     stringList[1] = stringList[0];
                     stringList[0] = newMovie;
@@ -258,7 +257,7 @@ namespace pickflicks2.Services
                 // Append the new userId into the string
                 List<string> stringList = foundMWG.suggestedMovieGenres.Split(',').ToList();
                 // int length = stringList.Count;
-                if(foundMWG.suggestedMovieGenres.Split(',').Length < 4)
+                if(foundMWG.suggestedMovieGenres.Split(',').Length < 3)
                 {
                     if(foundMWG.suggestedMovieGenres == "")
                     {
@@ -275,7 +274,6 @@ namespace pickflicks2.Services
                 }
                 else
                 {
-                    stringList[3] = stringList[2];
                     stringList[2] = stringList[1];
                     stringList[1] = stringList[0];
                     stringList[0] = newGenre;
