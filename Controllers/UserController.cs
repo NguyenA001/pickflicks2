@@ -21,7 +21,7 @@ namespace pickflicks2.Controllers
 
         // Add a user with a CreateAccuntDTO (will return bool)
         [HttpPost("AddUser")]
-          public bool AddUser(CreateAccountDTO userToAdd)
+          public IActionResult AddUser(CreateAccountDTO userToAdd)
         {
             return _data.AddUser(userToAdd);
         }

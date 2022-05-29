@@ -42,9 +42,9 @@ namespace pickflicks2.Services
             return newHashedPassword;
         }
 
-        public bool AddUser(CreateAccountDTO userToAdd)
+        public IActionResult AddUser(CreateAccountDTO userToAdd)
         {
-            bool result = false;
+            //bool result = false;
             if (!DoesUserExists(userToAdd.Username))
             {
                 UserModel newUser = new UserModel();
@@ -62,9 +62,32 @@ namespace pickflicks2.Services
                 
                 _context.Add(newUser);
 
-                result = _context.SaveChanges() != 0;
+                _context.SaveChanges();
             }
-            return result;
+
+            IActionResult Result = Unauthorized();
+            if (DoesUserExists(userToAdd.Username))
+            {
+                var foundUser = FindUserByUsername(userToAdd.Username);
+                var verifyPass = VerifyUserPassword(userToAdd.Password, foundUser.Hash, foundUser.Salt);
+                if (verifyPass)
+                {
+                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ILoveToSolveKatasAllDay@209"));
+                    var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                    var tokeOptions = new JwtSecurityToken(
+                        issuer: "http://localhost:5000",
+                        audience: "http://localhost:5000",
+                        claims: new List<Claim>(),
+                        expires: DateTime.Now.AddMinutes(30),
+                        signingCredentials: signinCredentials
+                    );
+                    
+                    var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+                    Result = Ok(new { Token = tokenString });
+                    
+                }
+            }
+            return Result;
         }
 
 
